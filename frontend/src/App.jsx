@@ -53,7 +53,7 @@ function App() {
 
         <div className="main-layout">
           {user && <Sidebar onLogout={handleLogout} />}
-          <div className={user ? "main-content" : "auth-layout"}>
+          <div className={user ? "main-content" : "full-viewport"}>
             <Routes>
               {user ? (
                 <>
@@ -68,9 +68,9 @@ function App() {
               ) : (
                 <>
                   <Route path="/" element={<Landing />} />
-                  <Route path="/login" element={<Login setUser={setUser} handleLogin={handleLogin} />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
+                  <Route path="/login" element={<div className="auth-layout"><Login setUser={setUser} handleLogin={handleLogin} /></div>} />
+                  <Route path="/register" element={<div className="auth-layout"><Register /></div>} />
+                  <Route path="/forgot-password" element={<div className="auth-layout"><ForgotPassword /></div>} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </>
               )}

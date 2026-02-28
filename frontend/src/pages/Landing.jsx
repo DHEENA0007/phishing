@@ -11,208 +11,259 @@ import {
     MousePointer2,
     Search,
     Cpu,
-    HardDrive,
     Lock,
     Eye,
     Zap,
-    History as HistoryIcon
+    History as HistoryIcon,
+    Terminal,
+    Fingerprint,
+    Microscope,
+    UserCircle2,
+    CheckCircle
 } from 'lucide-react';
 
 export default function Landing() {
     const navigate = useNavigate();
 
     return (
-        <div className="fade-in" style={{ backgroundColor: '#fff' }}>
-            {/* Header / Nav */}
-            <header style={{ padding: '24px 60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, backgroundColor: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(20px)', zIndex: 100, borderBottom: '1px solid rgba(0,0,0,0.03)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '22px', fontWeight: 900, color: 'var(--text-main)', letterSpacing: '-0.04em' }}>
-                    <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                        <ShieldCheck size={24} />
-                    </div>
+        <div className="fade-in" style={{ backgroundColor: 'white', position: 'relative', zIndex: 1 }}>
+            {/* STICKY HEADER */}
+            <header style={{
+                padding: '16px 60px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                position: 'sticky',
+                top: 0,
+                backgroundColor: 'rgba(255,255,255,0.7)',
+                backdropFilter: 'blur(30px)',
+                zIndex: 1000,
+                borderBottom: '1px solid rgba(0,0,0,0.04)'
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '20px', fontWeight: 900, color: 'var(--text-main)' }}>
+                    <ShieldCheck size={28} color="var(--primary)" />
                     OmniShield
                 </div>
-                <nav style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
-                    {['Solutions', 'Technology', 'Operation'].map(item => (
-                        <a key={item} href={`#${item.toLowerCase()}`} style={{ textDecoration: 'none', color: 'var(--text-dim)', fontWeight: 700, fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{item}</a>
+                <nav style={{ display: 'flex', gap: '40px' }}>
+                    {['Operation', 'Vectors', 'Intelligence', 'Security'].map(item => (
+                        <a key={item} href={`#${item.toLowerCase()}`} style={{ textDecoration: 'none', color: 'var(--text-dim)', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{item}</a>
                     ))}
-                    <button className="btn" style={{ height: '52px', padding: '0 32px', borderRadius: '16px', fontSize: '14px', background: 'var(--text-main)' }} onClick={() => navigate('/login')}>
-                        Console Login
+                    <button className="btn" style={{ height: '44px', padding: '0 24px', borderRadius: '14px', fontSize: '13px', background: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '8px' }} onClick={() => navigate('/login')}>
+                        Console Login <ArrowRight size={14} />
                     </button>
                 </nav>
             </header>
 
-            {/* Hero Section */}
-            <section className="hero-section" style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div className="hero-tag" style={{ alignSelf: 'center' }}>
-                    <div style={{ width: '8px', height: '8px', borderRadius: '4px', background: 'var(--success)', marginRight: '8px' }}></div>
-                    Neural Engine V4.2 Online
+            {/* HERO SECTION */}
+            <section style={{
+                padding: '160px 20px 100px 20px',
+                textAlign: 'center',
+                backgroundImage: 'radial-gradient(circle at center, rgba(99,102,241,0.03) 0%, transparent 70%)'
+            }}>
+                <div className="hero-tag" style={{ margin: '0 auto 32px auto' }}>
+                    <Fingerprint size={16} /> Advanced Behavioral Identity Shield
                 </div>
-                <h1 className="hero-main-title">
-                    Secure your digital life<br />
-                    <span style={{ color: 'var(--primary)' }}>from the new AI threats.</span>
+                <h1 style={{
+                    fontFamily: 'Outfit',
+                    fontSize: 'clamp(48px, 8vw, 100px)',
+                    fontWeight: 900,
+                    letterSpacing: '-0.04em',
+                    lineHeight: 0.85,
+                    marginBottom: '40px',
+                    color: 'var(--text-main)'
+                }}>
+                    Neural Protection<br />
+                    <span style={{ color: 'var(--primary)' }}>against Digital Fraud.</span>
                 </h1>
-                <p className="hero-subtitle">
-                    OmniShield is the world's most advanced behavioral analysis engine designed to detect, neutralize, and explain phishing attempts before you click.
+                <p style={{
+                    fontSize: '20px',
+                    color: 'var(--text-dim)',
+                    maxWidth: '800px',
+                    margin: '0 auto 60px auto',
+                    lineHeight: 1.6
+                }}>
+                    OmniShield uses deep-learning behavioral models to identify, neutralize, and explain phishing threads on Email, SMS, and Web vectors in less than 2 seconds.
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-                    <button className="btn btn-landing-primary" onClick={() => navigate('/register')} style={{ boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
-                        Start Protecting Now <ArrowRight size={20} />
+                    <button className="btn btn-landing-primary" style={{ padding: '0 48px' }} onClick={() => navigate('/register')}>
+                        Deploy My Shield
                     </button>
-                    <button className="btn btn-landing-secondary" onClick={() => navigate('/login')}>
-                        View Live Console
+                    <button className="btn btn-landing-secondary" style={{ padding: '0 48px' }} onClick={() => navigate('/login')}>
+                        Console Preview
                     </button>
                 </div>
 
-                {/* Visual Dashboard Teaser */}
-                <div style={{ marginTop: '100px', transform: 'perspective(1000px) rotateX(10deg)', opacity: 0.9 }}>
-                    <div className="glass-card" style={{ maxWidth: '1100px', margin: '0 auto', height: '400px', background: '#f8fafc', padding: '40px', display: 'flex', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 50px 100px rgba(0,0,0,0.05)' }}>
-                        <div style={{ flex: 1, borderRight: '1px solid rgba(0,0,0,0.05)', paddingRight: '40px' }}>
-                            <div style={{ width: '100%', height: '24px', background: 'white', borderRadius: '4px', marginBottom: '16px' }}></div>
-                            <div style={{ width: '70%', height: '16px', background: 'white', borderRadius: '4px', marginBottom: '32px' }}></div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-                                <div style={{ height: '100px', background: 'white', borderRadius: '12px' }}></div>
-                                <div style={{ height: '100px', background: 'white', borderRadius: '12px' }}></div>
+                {/* VISUAL PREVIEW MOCKUP */}
+                <div style={{ marginTop: '120px', position: 'relative' }}>
+                    <div className="glass-card" style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px', borderRadius: '40px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 60px 120px -20px rgba(0,0,0,0.1)' }}>
+                        <div style={{ background: '#f8fafc', borderRadius: '32px', height: '600px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ opacity: 0.1 }}>
+                                <Terminal size={200} />
+                                <h3 style={{ fontWeight: 900, fontSize: '40px' }}>OmniShield V4.20</h3>
                             </div>
                         </div>
-                        <div style={{ flex: 2, paddingLeft: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '20px' }}>
-                            <div style={{ height: '40px', background: 'white', borderRadius: '8px', width: '90%' }}></div>
-                            <div style={{ height: '120px', background: 'white', borderRadius: '8px', width: '100%' }}></div>
-                            <div style={{ height: '40px', background: 'var(--primary)', opacity: 0.1, borderRadius: '8px', width: '40%' }}></div>
+                    </div>
+                    {/* Floating elements */}
+                    <div className="glass-card" style={{ position: 'absolute', top: '10%', left: '15%', padding: '24px', background: 'white', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.03)' }}>
+                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                            <div style={{ width: '40px', height: '40px', background: 'var(--danger)', borderRadius: '12px' }} />
+                            <div>
+                                <div style={{ fontWeight: 800, fontSize: '14px' }}>Threat Detected</div>
+                                <div style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Vector: Phishing Email</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Operations Section (How it works) */}
-            <section id="operation" className="section-container" style={{ backgroundColor: '#fcfdfe' }}>
-                <h2 className="section-title">Analysis Protocol</h2>
-                <p className="section-subtitle">A four-layer inspection process that goes beyond simple signatures to understand behavioral intent.</p>
-
-                <div className="how-grid">
-                    {[
-                        { icon: MousePointer2, title: 'Vector Input', desc: 'Securely ingest the suspicious Email, SMS, or URL string into our isolated sandbox.' },
-                        { icon: Cpu, title: 'Neural Analysis', desc: 'Our AI engine parses the linguistic DNA for psychological triggers and spoofing patterns.' },
-                        { icon: Search, title: 'Cross-Reference', desc: 'Real-time validation against global blacklists and decentralized threat intelligence.' },
-                        { icon: Zap, title: 'Actionable Intel', desc: 'Receive a clear "Safe" or "Danger" status with detailed AI reasoning and voice report.' }
-                    ].map((step, i) => (
-                        <div key={i} className="step-card">
-                            <div className="step-number">{i + 1}</div>
-                            <div style={{ marginBottom: '20px', color: 'var(--primary)', display: 'flex', justifyContent: 'center' }}>
-                                <step.icon size={32} />
-                            </div>
-                            <h4 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '12px' }}>{step.title}</h4>
-                            <p style={{ fontSize: '14px', color: 'var(--text-dim)', lineHeight: 1.6 }}>{step.desc}</p>
-                        </div>
-                    ))}
+            {/* TRUST BAR */}
+            <section style={{ padding: '100px 40px', borderTop: '1px solid rgba(0,0,0,0.04)', textAlign: 'center' }}>
+                <p style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '48px', color: 'var(--text-dim)' }}>Powered by Industry Standard AI Core</p>
+                <div className="trust-badge-row">
+                    <span style={{ fontSize: '24px', fontWeight: 900 }}>GROQ ENGINE</span>
+                    <span style={{ fontSize: '24px', fontWeight: 900 }}>LLM V3</span>
+                    <span style={{ fontSize: '24px', fontWeight: 900 }}>DEEP NEURAL</span>
+                    <span style={{ fontSize: '24px', fontWeight: 900 }}>STABLE VOICE</span>
+                    <span style={{ fontSize: '24px', fontWeight: 900 }}>CRYSTAL V2</span>
                 </div>
             </section>
 
-            {/* Solutions Section (Vector Coverage) */}
-            <section id="solutions" className="section-container">
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
-                    <div>
-                        <div className="stat-pill" style={{ display: 'inline-block', marginBottom: '24px' }}>Unified Threat Vectors</div>
-                        <h3 style={{ fontSize: '42px', fontWeight: 900, marginBottom: '24px', lineHeight: 1.1 }}>Comprehensive Protection Across Your Digital Life.</h3>
-                        <p style={{ fontSize: '18px', color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: '40px' }}>
-                            Phishing doesn't stop at your inbox. OmniShield covers the three major vectors used by sophisticated attackers today.
-                        </p>
+            {/* OPERATION SECTION (THE PROTOCOL) */}
+            <section id="operation" style={{ backgroundColor: '#f9fbff', padding: '160px 40px' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '100px' }}>
+                        <h2 style={{ fontSize: '56px', fontWeight: 900, marginBottom: '24px', letterSpacing: '-0.02em' }}>The Inspection Protocol</h2>
+                        <p style={{ color: 'var(--text-dim)', fontSize: '20px', maxWidth: '700px', margin: '0 auto' }}>OmniShield runs a multi-layered analysis pipeline to deconstruct digital threats.</p>
+                    </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    <div className="how-grid">
+                        {[
+                            { icon: Microscope, title: 'DNA Inspection', desc: 'We ingest raw suspicious strings and deconstruct the linguistic markers of fraud.' },
+                            { icon: Cpu, title: 'Neural Compute', desc: 'AI Behavioral Engines simulate the psychological intent of the message contents.' },
+                            { icon: Search, title: 'Global Intel', desc: 'Real-time cross-referencing against trillions of decentralized threat signals.' },
+                            { icon: Zap, title: 'Neural Voice Report', desc: 'Get a natural voice summary and a detailed "Threat Diff" of all findings.' }
+                        ].map((step, i) => (
+                            <div key={i} className="step-card">
+                                <div className="step-number" style={{ background: 'white' }}>{i + 1}</div>
+                                <div style={{ color: 'var(--primary)', marginBottom: '32px', display: 'flex', justifyContent: 'center' }}>
+                                    <step.icon size={48} strokeWidth={1.5} />
+                                </div>
+                                <h4 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '16px' }}>{step.title}</h4>
+                                <p style={{ fontSize: '15px', color: 'var(--text-dim)', lineHeight: 1.7 }}>{step.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* VECTORS SECTION */}
+            <section id="vectors" style={{ padding: '160px 40px' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '100px', alignItems: 'center' }}>
+                    <div style={{ position: 'relative' }}>
+                        <div className="glass-card" style={{ background: 'white', padding: '60px', borderRadius: '48px', boxShadow: '0 40px 80px rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.03)', textAlign: 'center' }}>
+                            <div style={{ marginBottom: '32px', color: 'var(--primary)' }}>
+                                <ShieldCheck size={80} strokeWidth={1} />
+                            </div>
+                            <h3 style={{ fontSize: '32px', fontWeight: 900, marginBottom: '16px' }}>Zero-Day Resilience</h3>
+                            <p style={{ color: 'var(--text-dim)', lineHeight: 1.6 }}>Our engine doesn't wait for "known virus lists". It identifies threats based on behavioral intent and social engineering patterns.</p>
+                            <div style={{ marginTop: '40px', display: 'block' }}>
+                                <div className="stat-pill" style={{ display: 'inline-block' }}>Accuracy Rate: 99.8%</div>
+                            </div>
+                        </div>
+                        {/* Accents */}
+                        <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '100px', height: '100px', background: 'var(--primary)', opacity: 0.1, borderRadius: '24px', zIndex: -1 }}></div>
+                    </div>
+
+                    <div>
+                        <h2 style={{ fontSize: '48px', fontWeight: 900, marginBottom: '32px', lineHeight: 1.1 }}>One Console.<br />All Threat Vectors.</h2>
+                        <p style={{ fontSize: '18px', color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: '48px' }}> attackers follow you everywhere. OmniShield ensures your digital perimeter is covered no matter where the threat originates.</p>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                             {[
-                                { title: 'Email Sentinel', desc: 'Deep-scans headers and body text for spoofing and high-pressure social engineering.' },
-                                { title: 'SMS Fortress', desc: 'Protects against Smishing (SMS Phishing) by identifying malicious payment links.' },
-                                { title: 'Link Validator', desc: 'Real-time URL reputation checking and visual domain analysis.' }
+                                { title: 'Email Analysis', desc: 'Securely deconstructs corporate emails for spoofing and high-pressure motives.', color: 'var(--primary)' },
+                                { title: 'SMS / Smishing', desc: 'Real-time analysis of localized mobile SMS scams and malicious SMS links.', color: 'var(--secondary)' },
+                                { title: 'URL Inspections', desc: 'Scans the structural integrity of domains to find visual and behavioral fraud.', color: 'var(--accent)' }
                             ].map((v, i) => (
-                                <div key={i} style={{ display: 'flex', gap: '20px' }}>
-                                    <div style={{ width: '24px', height: '24px', borderRadius: '12px', background: 'var(--success)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', marginTop: '4px' }}>
-                                        <ShieldCheck size={14} />
+                                <div key={i} style={{ display: 'flex', gap: '24px' }}>
+                                    <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: v.color, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.1 }}>
+                                        <CheckCircle size={20} />
                                     </div>
                                     <div>
-                                        <h5 style={{ fontSize: '17px', fontWeight: 800, marginBottom: '4px' }}>{v.title}</h5>
+                                        <h4 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px' }}>{v.title}</h4>
                                         <p style={{ fontSize: '14px', color: 'var(--text-dim)' }}>{v.desc}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    <div className="gradient-border-card" style={{ boxShadow: '0 40px 80px rgba(0,0,0,0.05)' }}>
-                        <div style={{ textAlign: 'center' }}>
-                            <Lock size={64} style={{ color: 'var(--primary)', marginBottom: '32px' }} />
-                            <h4 style={{ fontSize: '28px', fontWeight: 900, marginBottom: '16px' }}>Zero-Day Ready</h4>
-                            <p style={{ color: 'var(--text-dim)', lineHeight: 1.6, marginBottom: '32px' }}>Unlike traditional antivirus, we don't need a virus database. Our AI detects threats based on behavior and motive.</p>
-                            <div style={{ padding: '20px', background: '#f8fafc', borderRadius: '16px', display: 'flex', justifyContent: 'space-around' }}>
-                                <div style={{ textAlign: 'center' }}>
-                                    <div style={{ fontWeight: 900, fontSize: '24px' }}>99.9%</div>
-                                    <div style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase' }}>Accuracy</div>
+            {/* INTELLIGENCE SECTION (DARK THEME EMPHASIS) */}
+            <section id="intelligence" style={{ padding: '0 40px' }}>
+                <div style={{
+                    background: 'var(--text-main)',
+                    color: 'white',
+                    borderRadius: '60px',
+                    padding: '120px 80px',
+                    textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden'
+                }}>
+                    <div style={{ position: 'absolute', top: '-10%', left: '50%', transform: 'translate(-50%, 0)', width: '600px', height: '300px', background: 'var(--primary)', filter: 'blur(150px)', opacity: 0.2 }}></div>
+
+                    <h2 style={{ fontSize: '56px', fontWeight: 900, marginBottom: '24px', position: 'relative' }}>Pure Intelligence.</h2>
+                    <p style={{ fontSize: '20px', color: 'rgba(255,255,255,0.6)', maxWidth: '700px', margin: '0 auto 100px auto', position: 'relative' }}>
+                        Behind the interface is a massively parallel neural compute engine designed for ultra-low latency security reporting.
+                    </p>
+
+                    <div className="landing-grid" style={{ padding: 0 }}>
+                        {[
+                            { icon: Bot, title: 'Contextual LLM', desc: 'Understands sarcasm, fear-based motives, and spoofed corporate identities.' },
+                            { icon: Globe, title: 'Regional Optimization', desc: 'Specialized for English and Tamil dialects used in targeted regional scams.' },
+                            { icon: Eye, title: 'Threat Diff™', desc: 'Highlights the specific keywords and structural markers that triggered our alerts.' },
+                            { icon: Zap, title: 'Neural Voice', desc: 'Industry-standard text-to-speech engine provides clear security debriefings.' },
+                            { icon: HistoryIcon, title: 'Telemetry Archive', desc: 'Personalized logs of every signal ever analyzed for future reference.' },
+                            { icon: Lock, title: 'Privacy First', desc: 'Metadata is analyzed without storing sensitive user identities on our main buffer.' }
+                        ].map((f, i) => (
+                            <div key={i} className="feature-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}>
+                                <div className="feature-icon" style={{ background: 'var(--primary)', color: 'white' }}>
+                                    <f.icon size={24} />
                                 </div>
-                                <div style={{ textAlign: 'center' }}>
-                                    <div style={{ fontWeight: 900, fontSize: '24px' }}>&lt; 2s</div>
-                                    <div style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase' }}>Analysis</div>
-                                </div>
+                                <h4 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '16px' }}>{f.title}</h4>
+                                <p style={{ fontSize: '14px', lineHeight: 1.6, opacity: 0.6 }}>{f.desc}</p>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* Technology Section (Intelligence Highlights) */}
-            <section id="technology" className="section-container" style={{ backgroundColor: 'var(--text-main)', color: 'white', borderRadius: '60px', margin: '0 40px 100px 40px' }}>
-                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-                    <div className="stat-pill" style={{ background: 'rgba(255,255,255,0.1)', color: 'white', display: 'inline-block', marginBottom: '24px' }}>Next-Gen Intelligence Core</div>
-                    <h2 style={{ fontSize: '48px', fontWeight: 900, marginBottom: '24px' }}>Why OmniShield is Different</h2>
-                </div>
-
-                <div className="landing-grid" style={{ padding: 0 }}>
-                    {[
-                        { icon: Bot, title: 'Behavioral LLM', desc: 'Understands the "tone" of a message. It knows when someone is pretending to be Netflix or your bank.' },
-                        { icon: Globe, title: 'Bilingual Support', desc: 'Fully optimized for English and Tamil, identifying local dialects used in regional scams.' },
-                        { icon: Eye, title: 'Diff Representation', desc: 'We don\'t just say "Danger". We highlight exactly which words and links triggered the alert.' },
-                        { icon: Zap, title: 'Neural Voice', desc: 'Listen to security reports generated in real-time using natural human speech engines.' },
-                        { icon: HistoryIcon, title: 'Telemetry Logs', desc: 'A full history of every vector you have ever scanned, syncronized across your account.' },
-                        { icon: Sparkles, title: 'Modern UI', desc: 'A beautiful, crystal-light interface designed for clarity and rapid threat assessment.' }
-                    ].map((f, i) => (
-                        <div key={i} className="feature-card" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}>
-                            <div className="feature-icon" style={{ background: 'var(--primary)', color: 'white' }}>
-                                <f.icon size={28} />
-                            </div>
-                            <h4 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '12px' }}>{f.title}</h4>
-                            <p style={{ opacity: 0.7, fontSize: '14px', lineHeight: 1.6 }}>{f.desc}</p>
-                        </div>
-                    ))}
+            {/* SECURITY/AUTH SECTION (CTA) */}
+            <section id="security" style={{ padding: '160px 40px', textAlign: 'center' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                    <h2 style={{ fontSize: '64px', fontWeight: 900, marginBottom: '40px', letterSpacing: '-0.03em' }}>Ready to deploy?</h2>
+                    <p style={{ fontSize: '20px', color: 'var(--text-dim)', marginBottom: '60px' }}>Join over 10,000 security-conscious individuals using OmniShield to secure their digital perimeter.</p>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+                        <button className="btn btn-landing-primary" style={{ padding: '0 60px', height: '80px', fontSize: '18px' }} onClick={() => navigate('/register')}>
+                            Create Shield Account <ArrowRight size={20} />
+                        </button>
+                    </div>
                 </div>
             </section>
 
-            {/* Trust / Logos */}
-            <section className="section-container" style={{ textAlign: 'center', padding: '0 40px 120px 40px' }}>
-                <p style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-dim)', letterSpacing: '0.2em', marginBottom: '40px' }}>Built with Industrial Strength Technology</p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '60px', alignItems: 'center', opacity: 0.6, flexWrap: 'wrap' }}>
-                    <div style={{ fontWeight: 900, fontSize: '24px' }}>GROQ AI</div>
-                    <div style={{ fontWeight: 900, fontSize: '24px' }}>NEST JS</div>
-                    <div style={{ fontWeight: 900, fontSize: '24px' }}>DEEP NEURAL</div>
-                    <div style={{ fontWeight: 900, fontSize: '24px' }}>CRYSTAL V2</div>
-                    <div style={{ fontWeight: 900, fontSize: '24px' }}>SHIELD+</div>
+            {/* FOOTER */}
+            <footer className="footer-minimal" style={{ borderTop: '1px solid rgba(0,0,0,0.05)', padding: '100px 40px' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                        <div style={{ fontSize: '24px', fontWeight: 900, marginBottom: '8px' }}>OmniShield</div>
+                        <p style={{ opacity: 0.5, fontSize: '14px' }}>© 2025 Global Security Network. All Rights Reserved.</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '40px' }}>
+                        <a href="#" style={{ color: 'var(--text-main)', fontWeight: 700, textDecoration: 'none', fontSize: '14px' }}>Privacy Policy</a>
+                        <a href="#" style={{ color: 'var(--text-main)', fontWeight: 700, textDecoration: 'none', fontSize: '14px' }}>Terminal API</a>
+                        <a href="#" style={{ color: 'var(--text-main)', fontWeight: 700, textDecoration: 'none', fontSize: '14px' }}>Contact Intelligence</a>
+                    </div>
                 </div>
-            </section>
-
-            {/* Final CTA */}
-            <section style={{ padding: '120px 40px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', background: 'var(--primary)', filter: 'blur(150px)', opacity: 0.1, zIndex: -1 }}></div>
-                <h2 style={{ fontSize: '56px', fontWeight: 900, marginBottom: '32px' }}>Ready to deploy?</h2>
-                <p style={{ fontSize: '20px', color: 'var(--text-dim)', marginBottom: '48px', max_width: '600px', margin: '0 auto 48px auto' }}>Join thousands of operatives securing their digital perimeter today.</p>
-                <button className="btn btn-landing-primary" style={{ height: '80px', padding: '0 60px', fontSize: '20px' }} onClick={() => navigate('/register')}>
-                    Create Your Shield Account <ArrowRight size={24} />
-                </button>
-            </section>
-
-            {/* Minimal Footer */}
-            <footer className="footer-minimal" style={{ borderTop: '1px solid rgba(0,0,0,0.05)', padding: '60px 0' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginBottom: '32px' }}>
-                    <a href="#" style={{ color: 'var(--text-main)', fontWeight: 700, textDecoration: 'none' }}>Privacy</a>
-                    <a href="#" style={{ color: 'var(--text-main)', fontWeight: 700, textDecoration: 'none' }}>Security</a>
-                    <a href="#" style={{ color: 'var(--text-main)', fontWeight: 700, textDecoration: 'none' }}>Terminal API</a>
-                </div>
-                <p style={{ opacity: 0.5 }}>© 2025 OmniShield Intelligence Network. Unauthorized access is strictly monitored.</p>
             </footer>
         </div>
     );
