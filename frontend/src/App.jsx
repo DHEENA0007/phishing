@@ -44,9 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app-container">
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-        <div className="blob blob-3"></div>
+        <div className="aurora"></div>
 
         <div className="main-layout">
           {user && <Sidebar onLogout={handleLogout} />}

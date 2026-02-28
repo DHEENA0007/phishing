@@ -22,45 +22,47 @@ export default function Login({ onLogin }) {
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <div style={{ background: 'linear-gradient(135deg, var(--secondary), var(--primary))', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 8px 20px rgba(249, 115, 22, 0.3)', marginBottom: '16px' }}>
+            <div style={{ background: 'var(--primary)', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 0 30px var(--primary-glow)', marginBottom: '16px' }}>
                 <Droplets size={48} color="white" />
             </div>
-            <h1 className="header-title" style={{ fontSize: '36px', marginBottom: '8px' }}>OctoGuard</h1>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>Login safely and securely</p>
+            <h1 className="header-title" style={{ fontSize: '42px', marginBottom: '8px', textAlign: 'center' }}>OctoGuard</h1>
+            <p style={{ color: 'var(--text-dim)', marginBottom: '40px', fontSize: '18px' }}>Secure Identity Verification</p>
 
-            {error && <div className="bg-danger text-danger" style={{ padding: '12px', borderRadius: '20px', marginBottom: '24px' }}>{error}</div>}
+            {error && <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '16px', borderRadius: '16px', marginBottom: '24px', border: '1px solid rgba(239, 68, 68, 0.2)', fontSize: '14px', fontWeight: '600' }}>{error}</div>}
 
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label className="input-label">Email Address</label>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ textAlign: 'left' }}>
+                    <label style={{ color: 'var(--text-dim)', display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '600' }}>Access Protocol (Email)</label>
                     <input
                         type="email"
                         className="input-field"
+                        placeholder="identity@nexus.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group" style={{ marginBottom: '32px' }}>
-                    <label className="input-label">Password</label>
+                <div style={{ textAlign: 'left' }}>
+                    <label style={{ color: 'var(--text-dim)', display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '600' }}>Security Key (Password)</label>
                     <input
                         type="password"
                         className="input-field"
+                        placeholder="••••••••"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                    Login to Dashboard
+                <button type="submit" className="btn" style={{ width: '100%', marginTop: '20px', height: '60px', fontSize: '18px' }}>
+                    Authorize Access
                 </button>
             </form>
 
-            <div style={{ marginTop: '24px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+            <div style={{ marginTop: '32px', textAlign: 'center', color: 'var(--text-dim)' }}>
                 <div style={{ marginBottom: '12px' }}>
-                    <Link to="/forgot-password" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Forgot Password?</Link>
+                    <Link to="/forgot-password" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Protocol Recovery?</Link>
                 </div>
-                Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Register here</Link>
+                New Entity? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Register Node</Link>
             </div>
         </div>
     );
