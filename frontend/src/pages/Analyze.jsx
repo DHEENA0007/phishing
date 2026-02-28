@@ -31,31 +31,58 @@ export default function Analyze() {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
     const [readingSpeed, setReadingSpeed] = useState(1.0);
+    const [ttsLanguage, setTtsLanguage] = useState('en');
     const [audioPlayer, setAudioPlayer] = useState(null);
+
+    const translations = {
+        en: {
+            scanComplete: "Scan complete.",
+            evaluatedAs: (type, status) => `The provided ${type} has been evaluated as: ${status}.`,
+            riskScore: (score) => `It received a calculated risk score of: ${score} percent.`,
+            insight: "Here is the security intelligence insight:",
+            noThreats: "No significant structural threats were detected during the scan.",
+            warning: "Warning. Suspicious elements or malicious patterns were structurally identified.",
+            statusMap: { 'Safe': 'Safe', 'Suspicious': 'Suspicious', 'Phishing': 'Phishing', 'Malicious': 'Malicious' },
+            typeMap: { 'Email': 'Email', 'SMS': 'SMS', 'URL': 'URL' }
+        },
+        ta: {
+            scanComplete: "ஸ்கேன் முடிந்தது.",
+            evaluatedAs: (type, status) => `வழங்கப்பட்ட ${type} ${status} என மதிப்பிடப்பட்டுள்ளது.`,
+            riskScore: (score) => `இதன் அபாய மதிப்பீடு: ${score} சதவீதம்.`,
+            insight: "பாதுகாப்பு நுண்ணறிவு விவரம் இதோ:",
+            noThreats: "இந்த ஸ்கேனில் குறிப்பிடத்தக்க பாதுகாப்பு அச்சுறுத்தல்கள் எதுவும் கண்டறியப்படவில்லை.",
+            warning: "எச்சரிக்கை. சந்தேகத்திற்கிடமான கூறுகள் அல்லது தீங்கிழைக்கும் வடிவங்கள் கண்டறியப்பட்டுள்ளன.",
+            statusMap: { 'Safe': 'பாதுகாப்பானது', 'Suspicious': 'சந்தேகத்திற்குரியது', 'Phishing': 'மோசடியானது', 'Malicious': 'ஆபத்தானது' },
+            typeMap: { 'Email': 'மின்னஞ்சல்', 'SMS': 'குறுஞ்செய்தி', 'URL': 'இணையதளம்' }
+        }
+    };
 
     const speakResult = async (resultData) => {
         setIsGeneratingAudio(true);
         try {
-            // Generate conversational chunks
+            const lang = ttsLanguage;
+            const t = translations[lang];
+
+            // Build text parts based on language
             const textParts = [
-                "Scan complete.",
-                `The provided ${typeMap[type]} has been evaluated as: ${resultData.status}.`,
-                `It received a calculated risk score of: ${resultData.risk_score} percent.`
+                t.scanComplete,
+                t.evaluatedAs(t.typeMap[typeMap[type]], t.statusMap[resultData.status] || resultData.status),
+                t.riskScore(resultData.risk_score)
             ];
 
             if (resultData.report_details?.ai_analysis?.reasoning) {
-                textParts.push("Here is the security intelligence insight:");
+                textParts.push(t.insight);
                 textParts.push(resultData.report_details.ai_analysis.reasoning);
             } else if (resultData.status === 'Safe') {
-                textParts.push("No significant structural threats were detected during the scan.");
+                textParts.push(t.noThreats);
             } else {
-                textParts.push("Warning. Suspicious elements or malicious patterns were structurally identified.");
+                textParts.push(t.warning);
             }
 
             const fullText = textParts.join(" ... ");
 
-            // Generate perfect pristine audio file blob securely via backend Llama -> gTTS
-            const audioUrl = await generateAudioURL(fullText);
+            // Generate audio via backend with language parameter
+            const audioUrl = await generateAudioURL(fullText, lang);
 
             // Clean up old audio if it exists
             if (audioPlayer) {
@@ -229,6 +256,15 @@ export default function Analyze() {
                                         <option value={1.25}>1.25x Speed</option>
                                         <option value={1.5}>1.5x Speed</option>
                                         <option value={2.0}>2x Speed</option>
+                                    </select>
+                                    <select
+                                        value={ttsLanguage}
+                                        onChange={(e) => setTtsLanguage(e.target.value)}
+                                        className="input-field"
+                                        style={{ padding: '4px 8px', fontSize: '12px', height: 'auto', width: 'auto', minHeight: 'unset', borderColor: 'var(--primary)' }}
+                                    >
+                                        <option value="en">English (US)</option>
+                                        <option value="ta">Tamil (தமிழ்)</option>
                                     </select>
                                     {isGeneratingAudio ? (
                                         <button className="btn btn-outline" style={{ padding: '4px 8px', fontSize: '12px', opacity: 0.7 }} disabled>

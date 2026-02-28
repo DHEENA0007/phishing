@@ -82,8 +82,8 @@ export const getHistory = async () => {
     return response.data;
 };
 
-export const generateAudioURL = async (text) => {
-    const response = await api.post('generate-audio/', { text }, { responseType: 'blob' });
+export const generateAudioURL = async (text, lang = 'en') => {
+    const response = await api.post('generate-audio/', { text, lang }, { responseType: 'blob' });
     return URL.createObjectURL(response.data);
 };
 

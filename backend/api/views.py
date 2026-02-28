@@ -144,6 +144,7 @@ def forgot_password(request):
 @permission_classes([permissions.IsAuthenticated])
 def generate_audio(request):
     text = request.data.get('text')
+    lang = request.data.get('lang', 'en') # Default to English
     
     if not text:
         return Response({'error': 'Text is required for audio generation.'}, status=400)
@@ -151,7 +152,7 @@ def generate_audio(request):
     try:
         # Utilize purely Google Translate Neural TTS backend via Python securely. 
         # This completely overrides local robotic voices and forces the pristine, high-fidelity Google female neural voice.
-        tts = gTTS(text=text, lang='en', tld='com')
+        tts = gTTS(text=text, lang=lang, tld='com')
         fp = io.BytesIO()
         tts.write_to_fp(fp)
         fp.seek(0)
