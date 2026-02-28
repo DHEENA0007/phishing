@@ -5,50 +5,41 @@ import { LayoutDashboard, MailSearch, MessageSquareWarning, Link as LinkIcon, Hi
 export default function Sidebar({ onLogout }) {
     return (
         <div className="sidebar">
-            <div style={{ padding: '32px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ marginBottom: '40px', display: 'flex', alignItems: 'center', gap: '12px', paddingLeft: '12px' }}>
-                    <div style={{ background: 'linear-gradient(135deg, var(--secondary), var(--primary))', padding: '10px', borderRadius: '16px', boxShadow: '0 4px 12px rgba(249, 115, 22, 0.4)' }}>
-                        <Droplets size={28} color="white" />
-                    </div>
-                    <h2 style={{ fontSize: '26px', fontWeight: '800', margin: 0, fontFamily: 'Outfit, sans-serif', textShadow: '1px 1px 1px rgba(255,255,255,0.8)' }}>OctoGuard</h2>
-                </div>
+            <div className="sidebar-logo">
+                <Droplets size={28} />
+            </div>
 
-                <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-                    <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <LayoutDashboard size={20} /> Dashboard
-                    </NavLink>
+            <div className="sidebar-content">
+                <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <LayoutDashboard size={20} /> <span>Dashboard</span>
+                </NavLink>
 
-                    <div style={{ margin: '24px 0 8px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Scanners</div>
+                <NavLink to="/analyze/email" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <MailSearch size={20} /> <span>Check Email</span>
+                </NavLink>
+                <NavLink to="/analyze/sms" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <MessageSquareWarning size={20} /> <span>Check SMS</span>
+                </NavLink>
+                <NavLink to="/analyze/url" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <LinkIcon size={20} /> <span>Check URL</span>
+                </NavLink>
 
-                    <NavLink to="/analyze/email" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <MailSearch size={20} /> Check Email
-                    </NavLink>
-                    <NavLink to="/analyze/sms" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <MessageSquareWarning size={20} /> Check SMS
-                    </NavLink>
-                    <NavLink to="/analyze/url" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <LinkIcon size={20} /> Check URL
-                    </NavLink>
+                <NavLink to="/history" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <History size={20} /> <span>History</span>
+                </NavLink>
+                <NavLink to="/education" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <BookOpen size={20} /> <span>Education</span>
+                </NavLink>
 
-                    <div style={{ margin: '24px 0 8px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Analytics</div>
-                    <NavLink to="/history" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <History size={20} /> History
-                    </NavLink>
-                    <NavLink to="/education" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <BookOpen size={20} /> Education
-                    </NavLink>
-                </nav>
-
-                <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border-color)', paddingTop: '24px' }}>
-                    <div style={{ margin: '0 0 16px 16px', fontSize: '13px', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Account</div>
+                <div style={{ marginTop: 'auto', width: '100%' }}>
                     <NavLink to="/profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <User size={20} /> Profile
+                        <User size={20} /> <span>Profile</span>
                     </NavLink>
                     <NavLink to="/settings" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <Settings size={20} /> Settings
+                        <Settings size={20} /> <span>Settings</span>
                     </NavLink>
-                    <button onClick={onLogout} className="nav-link" style={{ width: '100%', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'var(--danger)', marginTop: '8px' }}>
-                        <LogOut size={20} /> Logout
+                    <button onClick={onLogout} className="nav-link" style={{ width: '100%', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'var(--danger)' }}>
+                        <LogOut size={20} /> <span>Logout</span>
                     </button>
                 </div>
             </div>

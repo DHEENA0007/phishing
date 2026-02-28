@@ -27,34 +27,34 @@ export default function Dashboard() {
         <div className="fade-in">
             <h1 className="header-title">Security Dashboard</h1>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '32px' }}>
-                <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <div style={{ padding: '16px', borderRadius: '16px', background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)' }}>
+            <div className="dashboard-grid">
+                <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px' }}>
+                    <div style={{ padding: '16px', borderRadius: '16px', background: 'var(--primary-light)', color: 'var(--primary)', boxShadow: 'var(--shadow-inner)' }}>
                         <Activity size={32} />
                     </div>
                     <div>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '4px' }}>Total Scans</div>
-                        <div style={{ fontSize: '32px', fontWeight: 'bold' }}>{stats.total}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '4px', fontWeight: 600 }}>Total Scans</div>
+                        <div style={{ fontSize: '32px', fontWeight: '800' }}>{stats.total}</div>
                     </div>
                 </div>
 
-                <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <div style={{ padding: '16px', borderRadius: '16px', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)' }}>
+                <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px' }}>
+                    <div style={{ padding: '16px', borderRadius: '16px', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', boxShadow: 'var(--shadow-inner)' }}>
                         <ShieldCheck size={32} />
                     </div>
                     <div>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '4px' }}>Safe Items</div>
-                        <div style={{ fontSize: '32px', fontWeight: 'bold' }}>{stats.safe}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '4px', fontWeight: 600 }}>Safe Items</div>
+                        <div style={{ fontSize: '32px', fontWeight: '800' }}>{stats.safe}</div>
                     </div>
                 </div>
 
-                <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <div style={{ padding: '16px', borderRadius: '16px', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)' }}>
+                <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px' }}>
+                    <div style={{ padding: '16px', borderRadius: '16px', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', boxShadow: 'var(--shadow-inner)' }}>
                         <AlertTriangle size={32} />
                     </div>
                     <div>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '4px' }}>High Risk Flags</div>
-                        <div style={{ fontSize: '32px', fontWeight: 'bold' }}>{stats.highRisk}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '4px', fontWeight: 600 }}>High Risk Flags</div>
+                        <div style={{ fontSize: '32px', fontWeight: '800' }}>{stats.highRisk}</div>
                     </div>
                 </div>
             </div>

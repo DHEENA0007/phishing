@@ -21,58 +21,54 @@ export default function Register() {
     };
 
     return (
-        <div className="bg-animated" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="glass-container" style={{ width: '100%', maxWidth: '480px', padding: '40px' }}>
-                <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <div style={{ background: 'linear-gradient(135deg, var(--secondary), var(--primary))', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 8px 20px rgba(249, 115, 22, 0.3)', marginBottom: '16px' }}>
-                        <UserPlus size={48} color="white" />
-                    </div>
-                    <h1 className="header-title" style={{ fontSize: '36px', marginBottom: '8px' }}>Create Account</h1>
-                    <p style={{ color: 'var(--text-secondary)' }}>Join OctoGuard to protect your life</p>
+        <div style={{ textAlign: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg, var(--secondary), var(--primary))', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 8px 20px rgba(249, 115, 22, 0.3)', marginBottom: '16px' }}>
+                <UserPlus size={48} color="white" />
+            </div>
+            <h1 className="header-title" style={{ fontSize: '36px', marginBottom: '8px' }}>Create Account</h1>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>Join OctoGuard to protect your life</p>
+
+            {error && <div className="bg-danger text-danger" style={{ padding: '12px', borderRadius: '20px', marginBottom: '24px' }}>{error}</div>}
+
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label className="input-label">Full Name</label>
+                    <input
+                        type="text"
+                        className="input-field"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="input-label">Email Address</label>
+                    <input
+                        type="email"
+                        className="input-field"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group" style={{ marginBottom: '32px' }}>
+                    <label className="input-label">Password</label>
+                    <input
+                        type="password"
+                        className="input-field"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
                 </div>
 
-                {error && <div className="bg-danger text-danger" style={{ padding: '12px', borderRadius: '8px', marginBottom: '24px', textAlign: 'center' }}>{error}</div>}
+                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                    Register Now
+                </button>
+            </form>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label className="input-label">Full Name</label>
-                        <input
-                            type="text"
-                            className="input-field"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="input-label">Email Address</label>
-                        <input
-                            type="email"
-                            className="input-field"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group" style={{ marginBottom: '24px' }}>
-                        <label className="input-label">Password</label>
-                        <input
-                            type="password"
-                            className="input-field"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '12px' }}>
-                        Register Now
-                    </button>
-                </form>
-
-                <div style={{ marginTop: '24px', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                    Already have an account? <Link to="/login" style={{ color: 'var(--primary)', textDecoration: 'none' }}>Login</Link>
-                </div>
+            <div style={{ marginTop: '24px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                Already have an account? <Link to="/login" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Login</Link>
             </div>
         </div>
     );
