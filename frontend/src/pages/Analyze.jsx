@@ -139,34 +139,70 @@ export default function Analyze() {
                         )}
                     </div>
 
-                    <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Or try a sample payload:</span>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    <div style={{ marginTop: '32px' }}>
+                        <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Bot size={20} color="var(--primary)" />
+                            Need a test case? Try our Sample Vault
+                        </h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
                             {samples[type].map((sample, idx) => (
                                 <button
                                     key={idx}
-                                    className="btn btn-outline"
                                     onClick={() => setContent(sample)}
-                                    style={{ fontSize: '12px', padding: '6px 12px', textAlign: 'left', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '300px' }}
+                                    className="glass-card"
+                                    style={{
+                                        padding: '20px',
+                                        textAlign: 'left',
+                                        cursor: 'pointer',
+                                        border: content === sample ? '2px solid var(--primary)' : '1px solid var(--border-color)',
+                                        background: content === sample ? 'var(--primary-light)' : 'rgba(255,255,255,0.4)',
+                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '12px'
+                                    }}
                                 >
-                                    {sample}
+                                    <div style={{
+                                        fontSize: '11px',
+                                        fontWeight: '800',
+                                        textTransform: 'uppercase',
+                                        color: idx === 2 && type !== 'sms' ? 'var(--success)' : 'var(--danger)',
+                                        letterSpacing: '0.05em'
+                                    }}>
+                                        {idx === 2 && type !== 'sms' ? '✓ Safe Baseline' : '⚠ Threat Sample'}
+                                    </div>
+                                    <div style={{
+                                        fontSize: '14px',
+                                        color: 'var(--text-secondary)',
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: '3',
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                        lineHeight: '1.6',
+                                        fontStyle: 'italic'
+                                    }}>
+                                        "{sample}"
+                                    </div>
+                                    <div style={{ marginTop: 'auto', fontSize: '13px', fontWeight: '700', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                        Load this content →
+                                    </div>
                                 </button>
                             ))}
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '16px', marginTop: '32px' }}>
+                    <div style={{ display: 'flex', gap: '16px', marginTop: '40px', alignItems: 'center' }}>
                         <button
                             className="btn btn-primary"
                             onClick={handleAnalyze}
                             disabled={loading || !content.trim()}
-                            style={{ width: '200px', height: '48px', fontSize: '16px' }}
+                            style={{ minWidth: '220px', height: '56px', fontSize: '18px' }}
                         >
-                            {loading ? 'Analyzing...' : `Scan ${typeMap[type]}`}
+                            {loading ? <Loader size={20} className="spin" /> : <>Scan {typeMap[type]}</>}
                         </button>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
                             <Info size={20} />
-                            <span style={{ fontSize: '14px' }}>All scans are securely processed and saved to your history.</span>
+                            <span style={{ fontSize: '14px', fontWeight: 500 }}>Results generated using OctoGuard AI V2</span>
                         </div>
                     </div>
                 </div>

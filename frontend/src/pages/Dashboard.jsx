@@ -102,49 +102,101 @@ export default function Dashboard() {
                 </button>
             </div>
 
-            <h2 style={{ fontSize: '20px', marginBottom: '20px' }}>Recent Activity</h2>
-            <div className="glass-container" style={{ overflow: 'hidden', padding: '10px' }}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Risk Score</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {history.slice(0, 5).map(item => (
-                            <tr key={item.id}>
-                                <td>{item.type}</td>
-                                <td style={{ color: 'var(--text-secondary)' }}>{new Date(item.date_analyzed).toLocaleString()}</td>
-                                <td>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <div style={{ flex: 1, background: 'rgba(0,0,0,0.05)', height: '8px', borderRadius: '4px', overflow: 'hidden', boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)' }}>
-                                            <div style={{
-                                                width: `${item.risk_score}%`,
-                                                height: '100%',
-                                                background: item.status === 'Safe' ? 'var(--success)' : item.status === 'Suspicious' ? 'var(--warning)' : 'var(--danger)',
-                                                borderRadius: '4px'
-                                            }} />
-                                        </div>
-                                        <span style={{ fontSize: '13px', fontWeight: '600' }}>{item.risk_score}%</span>
+            <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '32px', marginTop: '40px', color: 'var(--text-primary)' }}>Live Threat Intelligence Feed</h2>
+            <div className="glass-card" style={{ padding: '40px', position: 'relative' }}>
+                {history.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0', position: 'relative' }}>
+                        {/* The Vertical Line */}
+                        <div style={{ position: 'absolute', left: '20px', top: '10px', bottom: '10px', width: '3px', background: 'linear-gradient(to bottom, var(--primary), var(--secondary), transparent)', borderRadius: '3px', opacity: 0.3 }}></div>
+
+                        {history.slice(0, 6).map((item, index) => {
+                            const Icon = item.type === 'Email' ? MailSearch : item.type === 'SMS' ? MessagesSquare : Link;
+                            const statusColor = item.status === 'Safe' ? 'var(--success)' : item.status === 'Suspicious' ? 'var(--warning)' : 'var(--danger)';
+
+                            return (
+                                <div key={item.id} className="timeline-item" style={{
+                                    display: 'flex',
+                                    gap: '24px',
+                                    padding: '24px 0',
+                                    position: 'relative',
+                                    zIndex: 1,
+                                    opacity: 1 - (index * 0.12), // Fade out older items
+                                    transform: `scale(${1 - (index * 0.02)}) translateY(${index * -4}px)`
+                                }}>
+                                    {/* The Bubble */}
+                                    <div style={{
+                                        width: '44px',
+                                        height: '44px',
+                                        borderRadius: '16px',
+                                        background: 'var(--surface)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        boxShadow: 'var(--shadow-float)',
+                                        border: `2px solid ${statusColor}`,
+                                        flexShrink: 0
+                                    }}>
+                                        <Icon size={20} color={statusColor} />
                                     </div>
-                                </td>
-                                <td>
-                                    <span className={`bg-${item.status.toLowerCase().replace(' ', '-')}`} style={{ padding: '6px 16px', borderRadius: '16px', fontSize: '13px', fontWeight: 600 }}>
-                                        {item.status}
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
-                        {history.length === 0 && (
-                            <tr>
-                                <td colSpan="4" style={{ padding: '32px', textAlign: 'center', color: 'var(--text-secondary)' }}>No analysis records found.</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+
+                                    {/* The Content */}
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                                            <div>
+                                                <h4 style={{ margin: 0, fontSize: '18px', fontWeight: '700' }}>{item.type} Scan Analyzed</h4>
+                                                <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                                                    {new Date(item.date_analyzed).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • {new Date(item.date_analyzed).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                            <div style={{
+                                                background: `${statusColor}15`,
+                                                color: statusColor,
+                                                padding: '6px 16px',
+                                                borderRadius: '20px',
+                                                fontSize: '13px',
+                                                fontWeight: '800',
+                                                border: `1px solid ${statusColor}30`
+                                            }}>
+                                                {item.status.toUpperCase()}
+                                            </div>
+                                        </div>
+
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.3)', padding: '12px 20px', borderRadius: '20px' }}>
+                                            <div style={{ flex: 1, height: '6px', background: 'rgba(0,0,0,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
+                                                <div style={{ width: `${item.risk_score}%`, height: '100%', background: statusColor, borderRadius: '3px' }} />
+                                            </div>
+                                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-primary)', width: '40px' }}>{item.risk_score}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+
+                        <button
+                            onClick={() => navigate('/history')}
+                            style={{
+                                marginTop: '24px',
+                                padding: '16px',
+                                background: 'none',
+                                border: '2px dashed var(--border-color)',
+                                borderRadius: '24px',
+                                color: 'var(--text-secondary)',
+                                fontWeight: '700',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+                            onMouseOut={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
+                        >
+                            View Full Intelligence Repository →
+                        </button>
+                    </div>
+                ) : (
+                    <div style={{ textAlign: 'center', padding: '40px' }}>
+                        <Bot size={48} color="var(--border-color)" style={{ marginBottom: '16px' }} />
+                        <p style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>No scans in your history yet. Start exploring above!</p>
+                    </div>
+                )}
             </div>
         </div>
     );
