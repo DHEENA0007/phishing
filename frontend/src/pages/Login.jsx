@@ -1,68 +1,69 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../api/api';
-import { Droplets } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { ShieldCheck, Droplets, ArrowRight } from 'lucide-react';
 
-export default function Login({ onLogin }) {
+export default function Login({ setUser }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = await login({ email, password });
-            onLogin(data);
+            localStorage.setItem('token', data.token);
+            setUser(data.user);
             navigate('/');
         } catch (err) {
-            setError(err.response?.data?.error || 'Invalid credentials');
+            setError('System Access Denied: Verify Protocol Credentials');
         }
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <div style={{ background: 'var(--primary)', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 0 30px var(--primary-glow)', marginBottom: '16px' }}>
-                <Droplets size={48} color="white" />
-            </div>
-            <h1 className="header-title" style={{ fontSize: '42px', marginBottom: '8px', textAlign: 'center' }}>OctoGuard</h1>
-            <p style={{ color: 'var(--text-dim)', marginBottom: '40px', fontSize: '18px' }}>Secure Identity Verification</p>
-
-            {error && <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)', padding: '16px', borderRadius: '16px', marginBottom: '24px', border: '1px solid rgba(239, 68, 68, 0.2)', fontSize: '14px', fontWeight: '600' }}>{error}</div>}
-
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ textAlign: 'left' }}>
-                    <label style={{ color: 'var(--text-dim)', display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '600' }}>Access Protocol (Email)</label>
-                    <input
-                        type="email"
-                        className="input-field"
-                        placeholder="identity@nexus.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+        <div className="auth-layout">
+            <div className="glass-card auth-card" style={{ background: 'white' }}>
+                <div style={{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))', width: '80px', height: '80px', borderRadius: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 32px auto', boxShadow: 'var(--shadow-btn)', color: 'white' }}>
+                    <ShieldCheck size={42} />
                 </div>
-                <div style={{ textAlign: 'left' }}>
-                    <label style={{ color: 'var(--text-dim)', display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '600' }}>Security Key (Password)</label>
-                    <input
-                        type="password"
-                        className="input-field"
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn" style={{ width: '100%', marginTop: '20px', height: '60px', fontSize: '18px' }}>
-                    Authorize Access
-                </button>
-            </form>
 
-            <div style={{ marginTop: '32px', textAlign: 'center', color: 'var(--text-dim)' }}>
-                <div style={{ marginBottom: '12px' }}>
-                    <Link to="/forgot-password" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Protocol Recovery?</Link>
+                <h1 className="header-title" style={{ fontSize: '48px', marginBottom: '8px', textAlign: 'center' }}>OmniShield</h1>
+                <p style={{ color: 'var(--text-dim)', fontSize: '18px', marginBottom: '48px', fontWeight: 500 }}>Global Cyber Intelligence Node</p>
+
+                {error && <div style={{ background: 'rgba(239, 68, 68, 0.05)', color: 'var(--danger)', padding: '16px', borderRadius: '24px', marginBottom: '32px', fontSize: '14px', fontWeight: '700', border: '1px solid rgba(239, 68, 68, 0.1)' }}>{error}</div>}
+
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    <div style={{ textAlign: 'left' }}>
+                        <label style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginLeft: '12px', marginBottom: '8px', display: 'block' }}>Entity Identifier (Email)</label>
+                        <input
+                            type="email"
+                            className="input-field"
+                            placeholder="entity@omnishield.ai"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div style={{ textAlign: 'left' }}>
+                        <label style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginLeft: '12px', marginBottom: '8px', display: 'block' }}>Security Key (Password)</label>
+                        <input
+                            type="password"
+                            className="input-field"
+                            placeholder="••••••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="btn" style={{ width: '100%', marginTop: '16px', borderRadius: '24px', height: '72px', fontSize: '18px' }}>
+                        Establish Uplink <ArrowRight size={20} style={{ marginLeft: '8px' }} />
+                    </button>
+                </form>
+
+                <div style={{ marginTop: '40px', color: 'var(--text-dim)', fontWeight: 600 }}>
+                    New operative? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 800 }}>Enroll Agent →</Link>
                 </div>
-                New Entity? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Register Node</Link>
             </div>
         </div>
     );

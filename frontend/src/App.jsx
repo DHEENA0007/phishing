@@ -44,34 +44,36 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app-container">
-        <div className="aurora"></div>
+        <div className="prism-bg">
+          <div className="prism-orb orb-1"></div>
+          <div className="prism-orb orb-2"></div>
+          <div className="prism-orb orb-3"></div>
+        </div>
 
         <div className="main-layout">
           {user && <Sidebar onLogout={handleLogout} />}
-          <main className={user ? "main-content" : "auth-layout"}>
-            <div className={user ? "content-area fade-in" : "auth-card fade-in"}>
-              <Routes>
-                {user ? (
-                  <>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/analyze/:type" element={<Analyze />} />
-                    <Route path="/history" element={<History />} />
-                    <Route path="/education" element={<Education />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="*" element={<Navigate to="/" />} />
-                  </>
-                ) : (
-                  <>
-                    <Route path="/login" element={<Login onLogin={handleLogin} />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="*" element={<Navigate to="/login" />} />
-                  </>
-                )}
-              </Routes>
-            </div>
-          </main>
+          <div className={user ? "main-content" : "auth-layout"}>
+            <Routes>
+              {user ? (
+                <>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/analyze/:type" element={<Analyze />} />
+                  <Route path="/history" element={<History />} />
+                  <Route path="/education" element={<Education />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="*" element={<Navigate to="/" />} />
+                </>
+              ) : (
+                <>
+                  <Route path="/login" element={<Login setUser={setUser} handleLogin={handleLogin} />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/forgot-password" element={<ForgotPassword />} />
+                  <Route path="*" element={<Navigate to="/login" />} />
+                </>
+              )}
+            </Routes>
+          </div>
         </div>
       </div>
     </BrowserRouter>

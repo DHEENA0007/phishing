@@ -142,261 +142,181 @@ export default function Analyze() {
             <h1 className="header-title">{title}</h1>
 
             {!result ? (
-                <div className="glass-container" style={{ padding: '32px' }}>
+                <div className="glass-card" style={{ padding: '48px' }}>
                     <div className="form-group">
-                        <label className="input-label" style={{ fontSize: '16px', marginBottom: '12px' }}>
-                            Paste your {title.toLowerCase().replace('analyze ', '').replace('scanner', 'URL')} here
+                        <label className="input-label" style={{ fontSize: '14px', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '16px', display: 'block' }}>
+                            {title.replace('Analyze ', '').replace('Scanner', 'URL')} Source Input
                         </label>
                         {type === 'url' ? (
                             <input
                                 type="url"
                                 className="input-field"
-                                placeholder="https://"
+                                placeholder="https://secure-node.ai/verify"
                                 value={content}
                                 onChange={e => setContent(e.target.value)}
                             />
                         ) : (
                             <textarea
                                 className="input-field"
-                                placeholder={`Paste the full ${type} content here...`}
+                                placeholder={`Paste the full ${type} cryptographic string or text here...`}
                                 value={content}
                                 onChange={e => setContent(e.target.value)}
-                                style={{ height: '200px' }}
+                                style={{ height: '240px', lineHeight: 1.6 }}
                             />
                         )}
                     </div>
 
-                    <div style={{ marginTop: '32px' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Bot size={20} color="var(--primary)" />
-                            Need a test case? Try our Sample Vault
+                    <div style={{ marginTop: '48px' }}>
+                        <h3 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <Bot size={24} color="var(--primary)" />
+                            Reference Telemetry Samples
                         </h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                             {samples[type].map((sample, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => setContent(sample)}
                                     className="glass-card"
                                     style={{
-                                        padding: '20px',
+                                        padding: '24px',
                                         textAlign: 'left',
                                         cursor: 'pointer',
-                                        border: content === sample ? '2px solid var(--primary)' : '1px solid var(--border-color)',
-                                        background: content === sample ? 'var(--primary-light)' : 'rgba(255,255,255,0.4)',
-                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        border: content === sample ? '2px solid var(--primary)' : '1px solid rgba(0,0,0,0.05)',
+                                        background: content === sample ? '#f5f3ff' : 'white',
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        gap: '12px'
+                                        gap: '16px',
+                                        boxShadow: content === sample ? '0 10px 20px rgba(99,102,241,0.1)' : '0 4px 6px rgba(0,0,0,0.02)'
                                     }}
                                 >
                                     <div style={{
-                                        fontSize: '11px',
-                                        fontWeight: '800',
+                                        fontSize: '10px',
+                                        fontWeight: '900',
                                         textTransform: 'uppercase',
                                         color: idx === 2 && type !== 'sms' ? 'var(--success)' : 'var(--danger)',
-                                        letterSpacing: '0.05em'
+                                        letterSpacing: '0.1em'
                                     }}>
-                                        {idx === 2 && type !== 'sms' ? '✓ Safe Baseline' : '⚠ Threat Sample'}
+                                        {idx === 2 && type !== 'sms' ? '🛡️ Safe Protocol' : '⚠️ Threat Vector'}
                                     </div>
                                     <div style={{
                                         fontSize: '14px',
-                                        color: 'var(--text-secondary)',
+                                        color: 'var(--text-dim)',
                                         display: '-webkit-box',
                                         WebkitLineClamp: '3',
                                         WebkitBoxOrient: 'vertical',
                                         overflow: 'hidden',
                                         lineHeight: '1.6',
-                                        fontStyle: 'italic'
                                     }}>
                                         "{sample}"
-                                    </div>
-                                    <div style={{ marginTop: 'auto', fontSize: '13px', fontWeight: '700', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                        Load this content →
                                     </div>
                                 </button>
                             ))}
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '16px', marginTop: '40px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '24px', marginTop: '56px', alignItems: 'center' }}>
                         <button
-                            className="btn btn-primary"
+                            className="btn"
                             onClick={handleAnalyze}
                             disabled={loading || !content.trim()}
-                            style={{ minWidth: '220px', height: '56px', fontSize: '18px' }}
+                            style={{ minWidth: '240px', height: '64px', fontSize: '18px', background: 'var(--primary)' }}
                         >
-                            {loading ? <Loader size={20} className="spin" /> : <>Scan {typeMap[type]}</>}
+                            {loading ? <Loader size={20} className="spin" /> : <>Initiate Shield Scan</>}
                         </button>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
-                            <Info size={20} />
-                            <span style={{ fontSize: '14px', fontWeight: 500 }}>Results generated using OctoGuard AI V2</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-dim)', fontSize: '14px', fontWeight: 600 }}>
+                            <Info size={18} />
+                            AI V2 Core Active
                         </div>
                     </div>
                 </div>
             ) : (
-                <div>
-                    <div className={`glass-container`} style={{ padding: '32px', borderLeft: `4px solid var(--${statusClass})`, marginBottom: '24px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+                <div className="fade-in">
+                    <div className="glass-card" style={{ borderLeft: `8px solid var(--${statusClass})`, padding: '48px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
                             <div>
-                                <h2 style={{ fontSize: '28px', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '12px', color: `var(--${statusClass})` }}>
+                                <h2 style={{ fontSize: '42px', fontWeight: 900, margin: 0, color: `var(--${statusClass})`, letterSpacing: '-0.03em' }}>
                                     {result.status}
                                 </h2>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Analysis Complete at {new Date(result.date_analyzed).toLocaleString()}</p>
-                                    <div style={{ padding: '0 8px', color: 'var(--border-color)' }}>|</div>
-                                    <select
-                                        value={readingSpeed}
-                                        onChange={(e) => setReadingSpeed(parseFloat(e.target.value))}
-                                        className="input-field"
-                                        style={{ padding: '4px 8px', fontSize: '12px', height: 'auto', width: 'auto', minHeight: 'unset' }}
-                                    >
-                                        <option value={0.5}>0.5x Speed</option>
-                                        <option value={0.75}>0.75x Speed</option>
-                                        <option value={1.0}>1x Normal</option>
-                                        <option value={1.25}>1.25x Speed</option>
-                                        <option value={1.5}>1.5x Speed</option>
-                                        <option value={2.0}>2x Speed</option>
-                                    </select>
-                                    <select
-                                        value={ttsLanguage}
-                                        onChange={(e) => setTtsLanguage(e.target.value)}
-                                        className="input-field"
-                                        style={{ padding: '4px 8px', fontSize: '12px', height: 'auto', width: 'auto', minHeight: 'unset', borderColor: 'var(--primary)' }}
-                                    >
-                                        <option value="en">English (US)</option>
-                                        <option value="ta">Tamil (தமிழ்)</option>
-                                    </select>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '12px' }}>
+                                    <div style={{ display: 'flex', gap: '8px' }}>
+                                        <select
+                                            value={readingSpeed}
+                                            onChange={(e) => setReadingSpeed(parseFloat(e.target.value))}
+                                            className="input-field"
+                                            style={{ padding: '8px 12px', fontSize: '13px', height: '36px', width: 'auto', borderRadius: '12px' }}
+                                        >
+                                            <option value={0.5}>0.5x Speed</option>
+                                            <option value={1.0}>1x Normal</option>
+                                            <option value={1.5}>1.5x Speed</option>
+                                            <option value={2.0}>2x Speed</option>
+                                        </select>
+                                        <select
+                                            value={ttsLanguage}
+                                            onChange={(e) => setTtsLanguage(e.target.value)}
+                                            className="input-field"
+                                            style={{ padding: '8px 12px', fontSize: '13px', height: '36px', width: 'auto', borderRadius: '12px', border: '1px solid var(--primary-glow)' }}
+                                        >
+                                            <option value="en">English</option>
+                                            <option value="ta">Tamil</option>
+                                        </select>
+                                    </div>
                                     {isGeneratingAudio ? (
-                                        <button className="btn btn-outline" style={{ padding: '4px 8px', fontSize: '12px', opacity: 0.7 }} disabled>
-                                            <Loader size={14} className="spin" /> Generating...
-                                        </button>
+                                        <div style={{ fontSize: '13px', color: 'var(--text-dim)', fontWeight: 700 }}><Loader size={14} className="spin" /> Synthesizing...</div>
                                     ) : isSpeaking ? (
-                                        <button className="btn btn-outline" style={{ padding: '4px 8px', fontSize: '12px', borderColor: 'var(--primary)' }} onClick={stopSpeaking}>
-                                            <VolumeX size={14} /> Stop Reading
+                                        <button className="btn" style={{ padding: '8px 16px', height: '36px', fontSize: '12px', background: 'var(--danger)', borderRadius: '12px' }} onClick={stopSpeaking}>
+                                            <VolumeX size={14} /> Stop
                                         </button>
                                     ) : (
-                                        <button className="btn btn-outline" style={{ padding: '4px 8px', fontSize: '12px' }} onClick={() => speakResult(result)}>
-                                            <Volume2 size={14} /> {result && audioPlayer ? 'Re-Read Result' : 'Read Result'}
+                                        <button className="btn" style={{ padding: '8px 16px', height: '36px', fontSize: '12px', background: 'var(--primary)', borderRadius: '12px' }} onClick={() => speakResult(result)}>
+                                            <Volume2 size={14} /> Read Report
                                         </button>
                                     )}
                                 </div>
                             </div>
                             <div style={{ textAlign: 'right' }}>
-                                <div style={{ fontSize: '36px', fontWeight: 'bold' }}>{result.risk_score}%</div>
-                                <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Risk Score</div>
+                                <div style={{ fontSize: '56px', fontWeight: '900', color: 'var(--text-main)', lineHeight: 1 }}>{result.risk_score}%</div>
+                                <div style={{ color: 'var(--text-dim)', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px' }}>Risk Index</div>
                             </div>
                         </div>
 
-                        <div style={{ width: '100%', height: '12px', background: 'rgba(0,0,0,0.05)', borderRadius: '6px', overflow: 'hidden', marginBottom: '32px', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
-                            <div style={{ width: `${result.risk_score}%`, height: '100%', background: `var(--${statusClass})`, borderRadius: '6px', boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.4)' }} />
+                        <div style={{ width: '100%', height: '16px', background: '#f1f5f9', borderRadius: '8px', overflow: 'hidden', marginBottom: '48px' }}>
+                            <div style={{ width: `${result.risk_score}%`, height: '100%', background: `var(--${statusClass})`, borderRadius: '8px', transition: 'width 1s cubic-bezier(0.16, 1, 0.3, 1)' }} />
                         </div>
 
-                        <h3 style={{ fontSize: '18px', marginBottom: '16px' }}>Detection Report</h3>
-
-                        {result.type === 'URL' ? (
-                            <div style={{ display: 'grid', gap: '12px' }}>
-                                <div className="glass-card" style={{ padding: '16px' }}>
-                                    <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Checked URL</div>
-                                    <div style={{ wordBreak: 'break-all', marginTop: '4px', fontSize: '16px' }}>{result.content}</div>
-                                </div>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                                    <div className="glass-card" style={{ padding: '16px' }}>
-                                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Domain Flags</div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '8px' }}>
-                                            {result.report_details.ip_based && <span style={{ color: 'var(--danger)' }}>⚠️ IP Based URL</span>}
-                                            {result.report_details.suspicious_tld && <span style={{ color: 'var(--warning)' }}>⚠️ High Risk TLD</span>}
-                                            {result.report_details.excessive_subdomains && <span style={{ color: 'var(--warning)' }}>⚠️ Multiple Subdomains</span>}
-                                            {result.report_details.url_entropy_suspicion && <span style={{ color: 'var(--warning)' }}>⚠️ Random Domain Name</span>}
-                                            {!result.report_details.ip_based && !result.report_details.suspicious_tld && !result.report_details.excessive_subdomains && !result.report_details.url_entropy_suspicion && <span style={{ color: 'var(--success)' }}>No structural anomalies found.</span>}
-                                        </div>
-                                    </div>
-                                    <div className={`glass-card bg-${result.report_details.blacklisted ? 'danger' : 'safe'}`} style={{ padding: '16px' }}>
-                                        <div style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Blacklist Status</div>
-                                        <div style={{ marginTop: '4px', fontWeight: 500 }}>{result.report_details.blacklisted ? 'Flagged on Blacklist' : 'Clean'}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        ) : (
-                            <div style={{ display: 'grid', gap: '24px' }}>
-                                {result.report_details.sender_suspicion && (
-                                    <div>
-                                        <h4 style={{ color: 'var(--danger)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <ShieldAlert size={16} /> Sender Anomaly
-                                        </h4>
-                                        <div className="glass-card bg-danger" style={{ padding: '16px' }}>
-                                            {result.report_details.sender_suspicion}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {result.report_details.url_findings?.length > 0 && (
-                                    <div>
-                                        <h4 style={{ color: 'var(--text-secondary)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <ExternalLink size={16} /> Extracted URLs ({result.report_details.url_findings.length})
-                                        </h4>
-                                        <div style={{ display: 'grid', gap: '12px' }}>
-                                            {result.report_details.url_findings.map((urlInfo, i) => (
-                                                <div key={i} className={`glass-card ${urlInfo.blacklisted || urlInfo.ip_based || urlInfo.suspicious_tld ? 'bg-danger' : ''}`} style={{ padding: '16px' }}>
-                                                    <div style={{ fontWeight: 500 }}>{urlInfo.domain}</div>
-                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
-                                                        {urlInfo.blacklisted && <span style={{ fontSize: '12px', color: 'var(--danger)', padding: '2px 8px', background: 'rgba(239, 68, 68, 0.2)', borderRadius: '12px' }}>Blacklisted Domain Deteted!</span>}
-                                                        {urlInfo.ip_based && <span style={{ fontSize: '12px', color: 'var(--warning)', padding: '2px 8px', background: 'rgba(245, 158, 11, 0.2)', borderRadius: '12px' }}>IP-Based URL (High Risk)</span>}
-                                                        {urlInfo.suspicious_tld && <span style={{ fontSize: '12px', color: 'var(--warning)', padding: '2px 8px', background: 'rgba(245, 158, 11, 0.2)', borderRadius: '12px' }}>Suspicious TLD</span>}
-                                                        {urlInfo.excessive_subdomains && <span style={{ fontSize: '12px', color: 'var(--warning)', padding: '2px 8px', background: 'rgba(245, 158, 11, 0.2)', borderRadius: '12px' }}>Excessive Subdomains</span>}
-                                                        {urlInfo.url_entropy_suspicion && <span style={{ fontSize: '12px', color: 'var(--warning)', padding: '2px 8px', background: 'rgba(245, 158, 11, 0.2)', borderRadius: '12px' }}>High Entropy (Looks Random generated)</span>}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {result.report_details.found_keywords?.length > 0 && (
-                                    <div>
-                                        <h4 style={{ color: 'var(--warning)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <ShieldAlert size={16} /> Suspicious Patterns Detected
-                                        </h4>
-                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                                            {result.report_details.found_keywords.map((kw, i) => (
-                                                <div key={i} className="bg-suspicious" style={{ padding: '8px 16px', borderRadius: '8px', fontSize: '14px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                    <strong>{kw.keyword}</strong>
-                                                    <span style={{ fontSize: '12px', opacity: 0.8 }}>Matched Rule: {kw.category}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {(!result.report_details.url_findings?.length && !result.report_details.found_keywords?.length && !result.report_details.sender_suspicion) && (
-                                    <div className="glass-card bg-safe" style={{ padding: '24px', textAlign: 'center' }}>
-                                        No malicious URLs, sender anomalies, or phishing keywords were identified in this message using structural rules.
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {result.report_details.ai_analysis?.reasoning && (
-                            <div style={{ marginTop: '24px' }}>
-                                <h4 style={{ color: 'var(--primary)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <Bot size={16} /> AI Security Insight
-                                </h4>
-                                <div className="glass-card" style={{ padding: '16px', borderLeft: '3px solid var(--primary)', background: 'var(--primary-light)' }}>
-                                    <p style={{ margin: 0, color: 'var(--text-primary)', lineHeight: 1.5 }}>
-                                        {result.report_details.ai_analysis.reasoning}
+                        <div className="dashboard-grid">
+                            <div style={{ gridColumn: 'span 12' }}>
+                                <div className="glass-card" style={{ background: '#f8fafc', padding: '32px', border: '1px solid rgba(0,0,0,0.03)' }}>
+                                    <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <Bot size={20} color="var(--primary)" /> Intelligence Reasoning
+                                    </h4>
+                                    <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--text-main)' }}>
+                                        {result.report_details.ai_analysis?.reasoning || "System structurally analyzed the provided vector. No behavioral anomalies detected by AI core."}
                                     </p>
                                 </div>
                             </div>
-                        )}
 
-                        <div style={{ marginTop: '32px' }}>
-                            <button className="btn btn-outline" onClick={() => {
-                                setResult(null);
-                                setContent('');
-                                stopSpeaking();
-                            }}>
-                                Scan Another
-                            </button>
+                            {result.report_details.url_findings?.length > 0 && (
+                                <div style={{ gridColumn: 'span 12', marginTop: '24px' }}>
+                                    <h4 style={{ marginBottom: '16px', fontWeight: 800, color: 'var(--text-dim)' }}>Detected Vectors ({result.report_details.url_findings.length})</h4>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                                        {result.report_details.url_findings.map((url, i) => (
+                                            <div key={i} className="glass-card" style={{ padding: '24px', background: 'white' }}>
+                                                <div style={{ fontWeight: 800, color: 'var(--text-main)' }}>{url.domain}</div>
+                                                <div style={{ fontSize: '12px', color: 'var(--danger)', marginTop: '8px', fontWeight: 700 }}>{url.blacklisted ? '⚠️ BLACKLISTED' : ''}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
+
+                        <button className="btn" style={{ marginTop: '48px', background: 'var(--bg-app)', color: 'var(--text-main)' }} onClick={() => {
+                            setResult(null);
+                            setContent('');
+                            stopSpeaking();
+                        }}>
+                            Clear Buffer & Scan New Vector
+                        </button>
                     </div>
                 </div>
             )}

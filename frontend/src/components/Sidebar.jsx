@@ -1,47 +1,48 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, MailSearch, MessageSquareWarning, Link as LinkIcon, History, BookOpen, LogOut, User, Settings, Droplets } from 'lucide-react';
+import { LayoutDashboard, MailSearch, MessageSquareWarning, Link as LinkIcon, History, BookOpen, LogOut, User, Settings, ShieldCheck } from 'lucide-react';
 
 export default function Sidebar({ onLogout }) {
     return (
         <div className="sidebar">
             <div className="sidebar-logo">
-                <Droplets size={28} />
+                <ShieldCheck size={28} />
             </div>
 
             <div className="sidebar-content">
                 <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    <LayoutDashboard size={20} /> <span>Dashboard</span>
+                    <LayoutDashboard size={22} /> <span>Dashboard</span>
                 </NavLink>
 
                 <NavLink to="/analyze/email" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    <MailSearch size={20} /> <span>Check Email</span>
+                    <MailSearch size={22} /> <span>Email Analyze</span>
                 </NavLink>
+
                 <NavLink to="/analyze/sms" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    <MessageSquareWarning size={20} /> <span>Check SMS</span>
+                    <MessageSquareWarning size={22} /> <span>SMS Analyze</span>
                 </NavLink>
+
                 <NavLink to="/analyze/url" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    <LinkIcon size={20} /> <span>Check URL</span>
+                    <LinkIcon size={22} /> <span>URL Scan</span>
                 </NavLink>
 
                 <NavLink to="/history" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    <History size={20} /> <span>History</span>
-                </NavLink>
-                <NavLink to="/education" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    <BookOpen size={20} /> <span>Education</span>
+                    <History size={22} /> <span>History</span>
                 </NavLink>
 
-                <div style={{ marginTop: 'auto', width: '100%' }}>
-                    <NavLink to="/profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <User size={20} /> <span>Profile</span>
-                    </NavLink>
-                    <NavLink to="/settings" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                        <Settings size={20} /> <span>Settings</span>
-                    </NavLink>
-                    <button onClick={onLogout} className="nav-link" style={{ width: '100%', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'var(--danger)' }}>
-                        <LogOut size={20} /> <span>Logout</span>
-                    </button>
-                </div>
+                <div style={{ width: '1px', height: '32px', background: 'rgba(0,0,0,0.05)', margin: '0 8px' }}></div>
+
+                <NavLink to="/profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <User size={22} /> <span>Profile</span>
+                </NavLink>
+
+                <NavLink to="/settings" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <Settings size={22} /> <span>Settings</span>
+                </NavLink>
+
+                <button onClick={onLogout} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--danger)' }}>
+                    <LogOut size={22} /> <span>Logout Protocol</span>
+                </button>
             </div>
         </div>
     );
