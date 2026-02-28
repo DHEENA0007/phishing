@@ -41,7 +41,7 @@ export default function Settings() {
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '24px', borderBottom: '1px solid var(--border-color)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                        <div style={{ background: 'rgba(79, 70, 229, 0.1)', padding: '12px', borderRadius: '50%' }}>
+                        <div style={{ background: 'var(--primary-light)', padding: '12px', borderRadius: '50%' }}>
                             <ShieldCheck size={24} color="var(--primary)" />
                         </div>
                         <div>
@@ -64,7 +64,7 @@ export default function Settings() {
                         </div>
                         <div>
                             <h3 style={{ fontSize: '18px', margin: '0 0 4px 0' }}>Appearance</h3>
-                            <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Toggle between light and dark modes (Currently locked to Dark for MVP).</p>
+                            <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Toggle between light and dark modes (Currently locked to OctoGuard Light for MVP).</p>
                         </div>
                     </div>
                     <button

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { register as registerApi } from '../api/api';
-import { ShieldCheck } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -24,9 +24,11 @@ export default function Register() {
         <div className="bg-animated" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div className="glass-container" style={{ width: '100%', maxWidth: '480px', padding: '40px' }}>
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <ShieldCheck size={48} color="var(--success)" style={{ marginBottom: '16px' }} />
-                    <h1 className="header-title" style={{ fontSize: '32px', marginBottom: '8px' }}>Create Account</h1>
-                    <p style={{ color: 'var(--text-secondary)' }}>Join PhishGuard for secure browsing</p>
+                    <div style={{ background: 'linear-gradient(135deg, var(--secondary), var(--primary))', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 8px 20px rgba(249, 115, 22, 0.3)', marginBottom: '16px' }}>
+                        <UserPlus size={48} color="white" />
+                    </div>
+                    <h1 className="header-title" style={{ fontSize: '36px', marginBottom: '8px' }}>Create Account</h1>
+                    <p style={{ color: 'var(--text-secondary)' }}>Join OctoGuard to protect your life</p>
                 </div>
 
                 {error && <div className="bg-danger text-danger" style={{ padding: '12px', borderRadius: '8px', marginBottom: '24px', textAlign: 'center' }}>{error}</div>}
@@ -63,7 +65,7 @@ export default function Register() {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '12px', background: 'var(--success)' }}>
+                    <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '12px' }}>
                         Register Now
                     </button>
                 </form>

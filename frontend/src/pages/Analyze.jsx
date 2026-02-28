@@ -180,7 +180,7 @@ export default function Analyze() {
                                 </h2>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                     <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Analysis Complete at {new Date(result.date_analyzed).toLocaleString()}</p>
-                                    <div style={{ padding: '0 8px', color: 'rgba(255,255,255,0.2)' }}>|</div>
+                                    <div style={{ padding: '0 8px', color: 'var(--border-color)' }}>|</div>
                                     <select
                                         value={readingSpeed}
                                         onChange={(e) => setReadingSpeed(parseFloat(e.target.value))}
@@ -215,8 +215,8 @@ export default function Analyze() {
                             </div>
                         </div>
 
-                        <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', marginBottom: '32px' }}>
-                            <div style={{ width: `${result.risk_score}%`, height: '100%', background: `var(--${statusClass})` }} />
+                        <div style={{ width: '100%', height: '12px', background: 'rgba(0,0,0,0.05)', borderRadius: '6px', overflow: 'hidden', marginBottom: '32px', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
+                            <div style={{ width: `${result.risk_score}%`, height: '100%', background: `var(--${statusClass})`, borderRadius: '6px', boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.4)' }} />
                         </div>
 
                         <h3 style={{ fontSize: '18px', marginBottom: '16px' }}>Detection Report</h3>

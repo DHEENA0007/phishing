@@ -67,14 +67,14 @@ export default function Dashboard() {
                     {recentScans.length > 0 ? (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             {recentScans.map((scan) => (
-                                <div key={scan.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border-color)' }}>
+                                <div key={scan.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px', borderRadius: '20px', background: 'var(--surface)', border: '1px solid var(--border-color)', boxShadow: 'var(--shadow-sm)' }}>
                                     <div>
-                                        <div style={{ fontWeight: 500, marginBottom: '4px' }}>{scan.type} Scan</div>
+                                        <div style={{ fontWeight: 600, marginBottom: '4px' }}>{scan.type} Scan</div>
                                         <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
                                             {new Date(scan.date_analyzed).toLocaleString()}
                                         </div>
                                     </div>
-                                    <div className={`bg-${scan.status === 'Safe' ? 'safe' : scan.status === 'Suspicious' ? 'suspicious' : 'danger'}`} style={{ padding: '6px 12px', borderRadius: '20px', fontSize: '14px', fontWeight: 500 }}>
+                                    <div className={`bg-${scan.status === 'Safe' ? 'safe' : scan.status === 'Suspicious' ? 'suspicious' : 'danger'}`} style={{ padding: '6px 12px', borderRadius: '20px', fontSize: '14px', fontWeight: 600 }}>
                                         {scan.status}
                                     </div>
                                 </div>
@@ -103,35 +103,36 @@ export default function Dashboard() {
             </div>
 
             <h2 style={{ fontSize: '20px', marginBottom: '20px' }}>Recent Activity</h2>
-            <div className="glass-container" style={{ overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <div className="glass-container" style={{ overflow: 'hidden', padding: '10px' }}>
+                <table>
                     <thead>
-                        <tr style={{ borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                            <th style={{ padding: '16px 24px', color: 'var(--text-secondary)', fontWeight: 500 }}>Type</th>
-                            <th style={{ padding: '16px 24px', color: 'var(--text-secondary)', fontWeight: 500 }}>Date</th>
-                            <th style={{ padding: '16px 24px', color: 'var(--text-secondary)', fontWeight: 500 }}>Risk Score</th>
-                            <th style={{ padding: '16px 24px', color: 'var(--text-secondary)', fontWeight: 500 }}>Status</th>
+                        <tr>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Risk Score</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {history.slice(0, 5).map(item => (
-                            <tr key={item.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                                <td style={{ padding: '16px 24px' }}>{item.type}</td>
-                                <td style={{ padding: '16px 24px', color: 'var(--text-secondary)' }}>{new Date(item.date_analyzed).toLocaleString()}</td>
-                                <td style={{ padding: '16px 24px' }}>
+                            <tr key={item.id}>
+                                <td>{item.type}</td>
+                                <td style={{ color: 'var(--text-secondary)' }}>{new Date(item.date_analyzed).toLocaleString()}</td>
+                                <td>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <div style={{ flex: 1, background: 'rgba(255,255,255,0.1)', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
+                                        <div style={{ flex: 1, background: 'rgba(0,0,0,0.05)', height: '8px', borderRadius: '4px', overflow: 'hidden', boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.1)' }}>
                                             <div style={{
                                                 width: `${item.risk_score}%`,
                                                 height: '100%',
-                                                background: item.status === 'Safe' ? 'var(--success)' : item.status === 'Suspicious' ? 'var(--warning)' : 'var(--danger)'
+                                                background: item.status === 'Safe' ? 'var(--success)' : item.status === 'Suspicious' ? 'var(--warning)' : 'var(--danger)',
+                                                borderRadius: '4px'
                                             }} />
                                         </div>
-                                        <span style={{ fontSize: '12px' }}>{item.risk_score}%</span>
+                                        <span style={{ fontSize: '13px', fontWeight: '600' }}>{item.risk_score}%</span>
                                     </div>
                                 </td>
-                                <td style={{ padding: '16px 24px' }}>
-                                    <span className={`bg-${item.status.toLowerCase().replace(' ', '-')}`} style={{ padding: '4px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 500 }}>
+                                <td>
+                                    <span className={`bg-${item.status.toLowerCase().replace(' ', '-')}`} style={{ padding: '6px 16px', borderRadius: '16px', fontSize: '13px', fontWeight: 600 }}>
                                         {item.status}
                                     </span>
                                 </td>

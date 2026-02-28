@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../api/api';
-import { Shield } from 'lucide-react';
+import { Droplets } from 'lucide-react';
 
 export default function Login({ onLogin }) {
     const [email, setEmail] = useState('');
@@ -24,9 +24,11 @@ export default function Login({ onLogin }) {
         <div className="bg-animated" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div className="glass-container" style={{ width: '100%', maxWidth: '480px', padding: '40px' }}>
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <Shield size={48} color="var(--primary)" style={{ marginBottom: '16px' }} />
-                    <h1 className="header-title" style={{ fontSize: '32px', marginBottom: '8px' }}>PhishGuard</h1>
-                    <p style={{ color: 'var(--text-secondary)' }}>Login to secure your digital life</p>
+                    <div style={{ background: 'linear-gradient(135deg, var(--secondary), var(--primary))', padding: '16px', borderRadius: '24px', display: 'inline-block', boxShadow: '0 8px 20px rgba(249, 115, 22, 0.3)', marginBottom: '16px' }}>
+                        <Droplets size={48} color="white" />
+                    </div>
+                    <h1 className="header-title" style={{ fontSize: '36px', marginBottom: '8px' }}>OctoGuard</h1>
+                    <p style={{ color: 'var(--text-secondary)' }}>Login safely and securely</p>
                 </div>
 
                 {error && <div className="bg-danger text-danger" style={{ padding: '12px', borderRadius: '8px', marginBottom: '24px', textAlign: 'center' }}>{error}</div>}

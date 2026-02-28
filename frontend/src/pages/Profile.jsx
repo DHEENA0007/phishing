@@ -114,7 +114,7 @@ export default function Profile() {
                             <h3 style={{ fontSize: '18px', margin: '0 0 4px 0', color: 'var(--text-secondary)' }}>Total Scans Conducted</h3>
                             <p style={{ fontSize: '32px', fontWeight: 'bold', margin: 0 }}>{history.length}</p>
                         </div>
-                        <ShieldAlert size={48} color="rgba(255,255,255,0.1)" />
+                        <ShieldAlert size={48} color="rgba(249, 115, 22, 0.2)" />
                     </div>
 
                     <div className="glass-container" style={{ padding: '32px' }}>
@@ -137,7 +137,7 @@ export default function Profile() {
                 </div>
             </div>
 
-            <div className="glass-container" style={{ padding: '32px', marginTop: '32px', border: '1px solid rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.05)' }}>
+            <div className="glass-container" style={{ padding: '32px', marginTop: '32px', border: '1px solid rgba(239, 68, 68, 0.4)', background: 'rgba(239, 68, 68, 0.05)' }}>
                 <h3 style={{ fontSize: '18px', color: 'var(--danger)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Trash2 size={20} /> Danger Zone
                 </h3>
