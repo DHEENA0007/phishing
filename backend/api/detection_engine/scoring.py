@@ -4,7 +4,7 @@ from .url_checker import evaluate_url
 from .utils import determine_status
 from .ai_analyzer import analyze_with_ai
 
-def process_analysis(content, type_):
+def process_analysis(content, type_, lang='en'):
     if type_ == 'URL':
         score, details = evaluate_url(content)
     else:
@@ -21,8 +21,8 @@ def process_analysis(content, type_):
             'sender_suspicion': email_details.get('sender_suspicion') or sms_details.get('sender_suspicion')
         }
 
-    # Integrate AI Insights
-    ai_result = analyze_with_ai(content, type_)
+    # Integrate AI Insights with language preference
+    ai_result = analyze_with_ai(content, type_, lang)
     if ai_result:
         ai_score = ai_result.get('ai_risk_score', 0)
         ai_reason = ai_result.get('ai_reasoning', '')

@@ -125,7 +125,7 @@ export default function Analyze() {
         setLoading(true);
         setResult(null);
         try {
-            const data = await analyzeContent({ type: typeMap[type], content });
+            const data = await analyzeContent({ type: typeMap[type], content, lang: ttsLanguage });
             setResult(data);
             speakResult(data);
         } catch (err) {

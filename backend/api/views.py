@@ -67,11 +67,12 @@ def current_user(request):
 def analyze_content(request):
     content_type = request.data.get('type') # Email, SMS, URL
     content = request.data.get('content')
+    lang = request.data.get('lang', 'en') # Get requested language
 
     if not content or not content_type:
         return Response({'error': 'Content and type required'}, status=status.HTTP_400_BAD_REQUEST)
 
-    risk_score, eval_status, report_details = process_analysis(content, content_type)
+    risk_score, eval_status, report_details = process_analysis(content, content_type, lang)
 
     if content_type == 'URL':
         url_obj, created = UrlChecked.objects.get_or_create(url=content)
@@ -140,6 +141,8 @@ def forgot_password(request):
             # Here you would typically generate a password reset token and send an email.
             # For this MVP, we will just simulate a successful request.
             pass
+from .detection_engine.ai_analyzer import translate_to_target
+
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def generate_audio(request):
@@ -150,8 +153,12 @@ def generate_audio(request):
         return Response({'error': 'Text is required for audio generation.'}, status=400)
 
     try:
+        # If the language requested is not English, translate the text before speaking.
+        # This solves the issue where English AI reasoning was unreadable in Tamil.
+        if lang != 'en':
+            text = translate_to_target(text, lang)
+
         # Utilize purely Google Translate Neural TTS backend via Python securely. 
-        # This completely overrides local robotic voices and forces the pristine, high-fidelity Google female neural voice.
         tts = gTTS(text=text, lang=lang, tld='com')
         fp = io.BytesIO()
         tts.write_to_fp(fp)
