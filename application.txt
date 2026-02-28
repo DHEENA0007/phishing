@@ -1,0 +1,535 @@
+Phishing Detection System (Email & SMS) – Web Application Draft
+
+Backend: Python Django
+Database: SQLite3
+Frontend: React
+Portal: User Portal Only (Self-Service Platform)
+
+1. Project Overview
+
+The Phishing Detection System is a web-based application that allows registered users to analyze suspicious emails and SMS messages to determine whether they are legitimate or phishing attempts.
+
+The system is designed for:
+
+Individuals
+
+Small businesses
+
+Students
+
+Corporate employees
+
+The application focuses on:
+
+Manual message analysis
+
+URL inspection
+
+Sender verification checks
+
+Domain validation
+
+Message pattern evaluation
+
+Risk scoring (Rule-Based, not AI-based)
+
+No artificial intelligence or machine learning models are included. The detection engine is purely rule-based and logic-driven.
+
+2. Application Objective
+
+The goal of this application is to:
+
+Help users identify phishing messages
+
+Provide a risk score
+
+Explain why a message is suspicious
+
+Educate users about phishing patterns
+
+Maintain history of analyzed messages
+
+3. System Architecture
+
+Frontend (Web):
+
+Clean dashboard UI
+
+Input forms for email & SMS analysis
+
+Results display panel
+
+History management
+
+Backend (Django):
+
+REST APIs
+
+Phishing detection logic engine
+
+URL/domain verification logic
+
+Message parsing module
+
+Risk scoring engine
+
+User authentication & session management
+
+Database (SQLite3):
+
+Users
+
+AnalysisRecords
+
+URLsChecked
+
+BlacklistDomains
+
+SuspiciousKeywords
+
+Reports
+
+4. User Portal – Complete Screen Structure
+
+Since this application includes only one portal (User Portal), the entire focus is on user-based functionality.
+
+5. Authentication Screens
+5.1 Registration Screen
+
+Purpose: Allow users to create an account.
+
+Fields:
+
+Full Name
+
+Email
+
+Phone Number (optional)
+
+Password
+
+Confirm Password
+
+Accept Terms checkbox
+
+Register button
+
+UI Design:
+
+Centered form
+
+Minimal layout
+
+Soft grey background
+
+Blue primary button
+
+Error validation messages below inputs
+
+5.2 Login Screen
+
+Fields:
+
+Email
+
+Password
+
+Login button
+
+Forgot Password link
+
+Register link
+
+Design:
+
+Split layout
+
+Left side: Security illustration
+
+Right side: Login form
+
+5.3 Forgot Password Screen
+
+Enter registered email
+
+Send reset link
+
+Success message display
+
+6. User Dashboard Screen
+
+After login, user is redirected to Dashboard.
+
+Dashboard Layout:
+
+Top Section:
+
+Welcome message
+
+Risk summary overview
+
+Middle Section:
+
+Analyze Email button
+
+Analyze SMS button
+
+URL Scanner button
+
+Bottom Section:
+
+Recent analysis history
+
+Quick statistics:
+
+Total messages scanned
+
+High-risk detections
+
+Safe detections
+
+UI Style:
+
+Card-based design
+
+Soft shadows
+
+Clear color indicators:
+
+Green (Safe)
+
+Orange (Suspicious)
+
+Red (High Risk)
+
+7. Email Analysis Module
+7.1 Analyze Email Screen
+
+User can paste:
+
+Full email content
+
+Email subject
+
+Sender email address
+
+Headers (optional advanced section)
+
+Features:
+
+Extract URLs from email
+
+Detect suspicious keywords
+
+Check sender domain validity
+
+Detect mismatched links
+
+Check domain age (if configured)
+
+Detect suspicious attachments (by name pattern)
+
+UI Design:
+
+Large text input area
+
+Expandable advanced options
+
+Analyze button (Primary Blue)
+
+7.2 Email Result Screen
+
+Displays:
+
+Risk Score (0–100%)
+
+Color Bar:
+
+0–30% → Green (Safe)
+
+31–70% → Orange (Suspicious)
+
+71–100% → Red (High Risk)
+
+Sections:
+
+Risk Summary
+
+Detected Suspicious Keywords
+
+Suspicious Links
+
+Sender Domain Status
+
+Header Anomalies (if provided)
+
+Final Recommendation:
+
+Safe to proceed
+
+Verify before clicking
+
+Do not interact
+
+Design:
+
+Risk meter gauge at top
+
+Expandable explanation panels
+
+8. SMS Analysis Module
+8.1 Analyze SMS Screen
+
+Fields:
+
+SMS message content
+
+Sender number
+
+System checks:
+
+Shortened URLs
+
+Urgency keywords (e.g., "urgent", "verify now")
+
+Financial fraud patterns
+
+Fake prize messages
+
+OTP scam patterns
+
+UI:
+
+Simple input box
+
+Analyze button
+
+Info tooltip explaining phishing SMS patterns
+
+8.2 SMS Result Screen
+
+Displays:
+
+Risk percentage
+
+Highlighted suspicious phrases
+
+Extracted links
+
+Recommendation
+
+Color-coded result layout similar to Email results.
+
+9. URL Scanner Screen
+
+User enters:
+
+Single URL
+
+System performs:
+
+Domain format validation
+
+HTTP vs HTTPS check
+
+Suspicious subdomain detection
+
+IP address URL detection
+
+Blacklist check
+
+Redirect detection (if configured)
+
+Result shows:
+
+URL trust score
+
+Domain information
+
+Risk summary
+
+10. History Screen
+
+User can view:
+
+Date of analysis
+
+Type (Email / SMS / URL)
+
+Risk score
+
+Status (Safe / Suspicious / High Risk)
+
+Filters:
+
+By date
+
+By risk level
+
+By type
+
+Clicking record → Detailed report view
+
+11. Detailed Report Screen
+
+Displays full saved report including:
+
+Original message
+
+Extracted links
+
+Risk breakdown
+
+Timestamp
+
+Option to export report as PDF
+
+12. Education & Awareness Screen
+
+Provides:
+
+What is phishing?
+
+Common phishing techniques
+
+Email red flags
+
+SMS scam examples
+
+Safety tips
+
+Design:
+
+Informational cards
+
+Simple illustrations
+
+13. Profile Screen
+
+Shows:
+
+Name
+
+Email
+
+Total scans
+
+Account settings
+
+Change password
+
+Delete account
+
+14. Settings Screen
+
+Options:
+
+Email alerts for high-risk detection
+
+Dark / Light mode
+
+Notification preferences
+
+Privacy policy
+
+Terms of service
+
+15. Detection Logic (Rule-Based)
+
+The backend engine checks:
+
+Suspicious keyword frequency
+
+URL mismatch (display text vs actual link)
+
+Suspicious domain patterns
+
+IP-based URLs
+
+Excessive urgency words
+
+Grammar anomaly patterns
+
+Suspicious attachment extensions
+
+Known scam patterns (stored in DB)
+
+Each rule contributes weighted score to final risk score.
+
+16. Security & Data Privacy
+
+Encrypted passwords
+
+Secure session handling
+
+No storing of full email content permanently (optional)
+
+User-controlled data deletion
+
+HTTPS enforcement
+
+17. Complete Screen List Summary
+
+Authentication:
+
+Register
+
+Login
+
+Forgot Password
+
+Main:
+
+Dashboard
+
+Analyze Email
+
+Email Result
+
+Analyze SMS
+
+SMS Result
+
+URL Scanner
+
+URL Result
+
+History
+
+Detailed Report
+
+Education
+
+Profile
+
+Settings
+
+Total Screens:
+Approximately 14–18 structured screens
+
+18. Final Outcome
+
+This phishing detection web application provides:
+
+User registration
+
+Email & SMS manual scanning
+
+URL inspection
+
+Risk scoring
+
+Detailed explanations
+
+Scan history tracking
+
+Educational resources
+
+Built using:
+
+Python Django (Backend Logic & APIs)
+SQLite3 (Data Storage)
+Flutter Web (Frontend Interface)
+
+No AI components included.
+All detection is rule-based and explainable.
