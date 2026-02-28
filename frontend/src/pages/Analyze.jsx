@@ -135,6 +135,33 @@ export default function Analyze() {
         setLoading(false);
     };
 
+    const renderDiff = (text, foundKeywords = []) => {
+        if (!foundKeywords || !foundKeywords.length) return text;
+        const sortedKeywords = [...foundKeywords].sort((a, b) => b.keyword.length - a.keyword.length);
+        let parts = [text];
+        sortedKeywords.forEach(kw => {
+            const keyword = kw.keyword;
+            const newParts = [];
+            parts.forEach(part => {
+                if (typeof part !== 'string') {
+                    newParts.push(part);
+                    return;
+                }
+                const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                const split = part.split(regex);
+                split.forEach((s) => {
+                    if (s.toLowerCase() === keyword.toLowerCase()) {
+                        newParts.push(<span key={Math.random()} className="keyword-highlight" data-category={kw.category}>{s}</span>);
+                    } else if (s) {
+                        newParts.push(s);
+                    }
+                });
+            });
+            parts = newParts;
+        });
+        return parts;
+    };
+
     const statusClass = result?.status === 'Safe' ? 'success' : result?.status === 'Suspicious' ? 'warning' : 'danger';
 
     return (
@@ -292,6 +319,17 @@ export default function Analyze() {
                                     <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--text-main)' }}>
                                         {result.report_details.ai_analysis?.reasoning || "System structurally analyzed the provided vector. No behavioral anomalies detected by AI core."}
                                     </p>
+                                </div>
+                            </div>
+
+                            <div style={{ gridColumn: 'span 12', marginTop: '32px' }}>
+                                <div className="glass-card" style={{ background: 'white', padding: '32px', border: '1px solid rgba(0,0,0,0.03)' }}>
+                                    <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <ShieldAlert size={20} color="var(--danger)" /> Source Analysis Highlight
+                                    </h4>
+                                    <div className="diff-viewer">
+                                        {renderDiff(result.content, result.report_details.found_keywords)}
+                                    </div>
                                 </div>
                             </div>
 
