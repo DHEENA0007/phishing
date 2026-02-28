@@ -8,6 +8,7 @@ import History from './pages/History';
 import Education from './pages/Education';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import Landing from './pages/Landing';
 import ForgotPassword from './pages/ForgotPassword';
 import Sidebar from './components/Sidebar';
 import { getCurrentUser } from './api/api';
@@ -66,10 +67,11 @@ function App() {
                 </>
               ) : (
                 <>
+                  <Route path="/" element={<Landing />} />
                   <Route path="/login" element={<Login setUser={setUser} handleLogin={handleLogin} />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="*" element={<Navigate to="/login" />} />
+                  <Route path="*" element={<Navigate to="/" />} />
                 </>
               )}
             </Routes>

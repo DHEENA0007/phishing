@@ -460,3 +460,121 @@ tr:hover td {
   background: #fef2f2;
   color: #991b1b;
 }
+
+/* LANDING PAGE SPECIFIC */
+.hero-section {
+  padding: 120px 20px 60px 20px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 32px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.hero-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 92px;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--text-main);
+  margin-bottom: 24px;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 56px auto;
+  line-height: 1.6;
+}
+
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding: 80px 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: white;
+  padding: 48px;
+  border-radius: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 40px 80px -20px rgba(99, 102, 241, 0.15);
+  border-color: var(--primary-glow);
+}
+
+.feature-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.btn-landing-primary {
+  height: 72px;
+  padding: 0 48px;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 28px;
+  background: var(--text-main);
+  color: white;
+  transition: all 0.3s;
+}
+
+.btn-landing-primary:hover {
+  background: #000;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.btn-landing-secondary {
+  height: 72px;
+  padding: 0 48px;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 28px;
+  background: white;
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s;
+}
+
+.btn-landing-secondary:hover {
+  background: #f8fafc;
+  transform: translateY(-4px);
+}
+
+.footer-minimal {
+  padding: 80px 0;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: 120px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
