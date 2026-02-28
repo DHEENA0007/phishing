@@ -93,23 +93,59 @@ export default function Landing() {
                     </button>
                 </div>
 
-                {/* VISUAL PREVIEW MOCKUP */}
+                {/* TECHNICAL TERMINAL MOCKUP (By Use Code) */}
                 <div style={{ marginTop: '120px', position: 'relative' }}>
-                    <div className="glass-card" style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px', borderRadius: '40px', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 60px 120px -20px rgba(0,0,0,0.1)' }}>
-                        <div style={{ background: '#f8fafc', borderRadius: '32px', height: '600px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <div style={{ opacity: 0.1 }}>
-                                <Terminal size={200} />
-                                <h3 style={{ fontWeight: 900, fontSize: '40px' }}>OmniShield V4.20</h3>
+                    <div className="glass-card" style={{ maxWidth: '1100px', margin: '0 auto', padding: '16px', borderRadius: '40px', background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 80px 160px -20px rgba(0,0,0,0.3)' }}>
+                        {/* Terminal Header */}
+                        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '16px' }}>
+                            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }}></div>
+                            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }}></div>
+                            <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }}></div>
+                            <div style={{ marginLeft: '12px', color: 'rgba(255,255,255,0.4)', fontSize: '12px', fontWeight: 700, fontFamily: 'monospace' }}>OmniShield-Terminal — zsh — 1440×900</div>
+                        </div>
+
+                        {/* Coded Simulation */}
+                        <div style={{
+                            textAlign: 'left',
+                            fontFamily: '"Fira Code", monospace',
+                            fontSize: '15px',
+                            lineHeight: 1.6,
+                            color: '#94a3b8',
+                            padding: '0 20px 20px 20px'
+                        }}>
+                            <div><span style={{ color: '#2dd4bf' }}>➜</span> <span style={{ color: '#6366f1' }}>~</span> curl -X POST https://api.omnishield.net/v4/analyze \</div>
+                            <div style={{ paddingLeft: '24px' }}>-H <span style={{ color: '#eab308' }}>"Authorization: Bearer agent_auth_token"</span> \</div>
+                            <div style={{ paddingLeft: '24px' }}>-d <span style={{ color: '#eab308' }}>'{"type": "Email", "content": "..."}'</span></div>
+
+                            <div style={{ marginTop: '32px', color: '#64748b' }}>// System: Processing vector DNA via Groq-V3...</div>
+                            <div style={{ color: '#64748b' }}>// System: Cross-referencing decentralized blacklists...</div>
+
+                            <div style={{ marginTop: '32px' }}>
+                                <span style={{ color: 'white', fontWeight: 700 }}>{'{'}</span>
+                                <div style={{ paddingLeft: '24px' }}>
+                                    <span style={{ color: '#94a3b8' }}>"status":</span> <span style={{ color: 'var(--danger)' }}>"Phishing Detected"</span>, <br />
+                                    <span style={{ color: '#94a3b8' }}>"risk_score":</span> <span style={{ color: '#f43f5e' }}>89.4</span>, <br />
+                                    <span style={{ color: '#94a3b8' }}>"analysis":</span> <span style={{ color: 'white' }}>{'{'}</span> <br />
+                                    <div style={{ paddingLeft: '24px' }}>
+                                        <span style={{ color: '#94a3b8' }}>"motive":</span> <span style={{ color: '#2dd4bf' }}>"Urgency, Financial Spoofing"</span>, <br />
+                                        <span style={{ color: '#94a3b8' }}>"reasoning":</span> <span style={{ color: '#2dd4bf' }}>"Structural pressure detected in header 4; spoofed SMTP origin matched known patterns."</span>
+                                    </div>
+                                    <span style={{ color: 'white' }}>{'}'}</span>
+                                </div>
+                                <span style={{ color: 'white', fontWeight: 700 }}>{'}'}</span>
                             </div>
                         </div>
                     </div>
-                    {/* Floating elements */}
-                    <div className="glass-card" style={{ position: 'absolute', top: '10%', left: '15%', padding: '24px', background: 'white', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.03)' }}>
-                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                            <div style={{ width: '40px', height: '40px', background: 'var(--danger)', borderRadius: '12px' }} />
+
+                    {/* Floating Tech Badges */}
+                    <div className="glass-card" style={{ position: 'absolute', top: '10%', right: '-40px', padding: '24px', background: 'white', borderRadius: '32px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid rgba(0,0,0,0.05)' }}>
+                        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                            <div style={{ width: '48px', height: '48px', background: 'rgba(99,102,241,0.1)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
+                                <Zap size={24} />
+                            </div>
                             <div>
-                                <div style={{ fontWeight: 800, fontSize: '14px' }}>Threat Detected</div>
-                                <div style={{ fontSize: '10px', color: 'var(--text-dim)' }}>Vector: Phishing Email</div>
+                                <div style={{ fontWeight: 900, fontSize: '18px' }}>&lt; 150ms</div>
+                                <div style={{ fontSize: '12px', color: 'var(--text-dim)', fontWeight: 700 }}>Analysis Latency</div>
                             </div>
                         </div>
                     </div>
