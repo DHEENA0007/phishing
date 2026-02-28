@@ -115,7 +115,7 @@ export default function Landing() {
                         }}>
                             <div><span style={{ color: '#2dd4bf' }}>➜</span> <span style={{ color: '#6366f1' }}>~</span> curl -X POST https://api.omnishield.net/v4/analyze \</div>
                             <div style={{ paddingLeft: '24px' }}>-H <span style={{ color: '#eab308' }}>"Authorization: Bearer agent_auth_token"</span> \</div>
-                            <div style={{ paddingLeft: '24px' }}>-d <span style={{ color: '#eab308' }}>'{"type": "Email", "content": "..."}'</span></div>
+                            <div style={{ paddingLeft: '24px' }}>-d <span style={{ color: '#eab308' }}>{"'{\"type\": \"Email\", \"content\": \"...\"}'"}</span></div>
 
                             <div style={{ marginTop: '32px', color: '#64748b' }}>// System: Processing vector DNA via Groq-V3...</div>
                             <div style={{ color: '#64748b' }}>// System: Cross-referencing decentralized blacklists...</div>
