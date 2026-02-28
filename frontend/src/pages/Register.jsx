@@ -26,7 +26,7 @@ export default function Register() {
                 <UserPlus size={48} color="white" />
             </div>
             <h1 className="header-title" style={{ fontSize: '36px', marginBottom: '8px' }}>Create Account</h1>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>Join OctoGuard to protect your life</p>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>Join OmniShield to protect your digital life</p>
 
             {error && <div className="bg-danger text-danger" style={{ padding: '12px', borderRadius: '20px', marginBottom: '24px' }}>{error}</div>}
 

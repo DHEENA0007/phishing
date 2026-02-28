@@ -41,7 +41,7 @@ export default function Sidebar({ onLogout }) {
                 </NavLink>
 
                 <button onClick={onLogout} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--danger)' }}>
-                    <LogOut size={22} /> <span>Logout Protocol</span>
+                    <LogOut size={22} /> <span>Sign Out</span>
                 </button>
             </div>
         </div>

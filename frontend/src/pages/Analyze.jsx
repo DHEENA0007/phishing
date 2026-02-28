@@ -39,7 +39,7 @@ export default function Analyze() {
             scanComplete: "Scan complete.",
             evaluatedAs: (type, status) => `The provided ${type} has been evaluated as: ${status}.`,
             riskScore: (score) => `It received a calculated risk score of: ${score} percent.`,
-            insight: "Here is the security intelligence insight:",
+            insight: "Here is the security analysis insight:",
             noThreats: "No significant structural threats were detected during the scan.",
             warning: "Warning. Suspicious elements or malicious patterns were structurally identified.",
             statusMap: { 'Safe': 'Safe', 'Suspicious': 'Suspicious', 'Phishing': 'Phishing', 'Malicious': 'Malicious' },
@@ -99,7 +99,7 @@ export default function Analyze() {
             setIsSpeaking(true);
         } catch (e) {
             console.error(e);
-            alert("Could not generate high-quality neural audio stream.");
+            alert("Could not generate audio report.");
         } finally {
             setIsGeneratingAudio(false);
         }
@@ -172,7 +172,7 @@ export default function Analyze() {
                 <div className="glass-card" style={{ padding: '48px' }}>
                     <div className="form-group">
                         <label className="input-label" style={{ fontSize: '14px', fontWeight: 800, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '16px', display: 'block' }}>
-                            {title.replace('Analyze ', '').replace('Scanner', 'URL')} Source Input
+                            {title.replace('Analyze ', '').replace('Scanner', 'URL')} Content
                         </label>
                         {type === 'url' ? (
                             <input
@@ -185,7 +185,7 @@ export default function Analyze() {
                         ) : (
                             <textarea
                                 className="input-field"
-                                placeholder={`Paste the full ${type} cryptographic string or text here...`}
+                                placeholder={`Paste the ${type} content here...`}
                                 value={content}
                                 onChange={e => setContent(e.target.value)}
                                 style={{ height: '240px', lineHeight: 1.6 }}
@@ -196,7 +196,7 @@ export default function Analyze() {
                     <div style={{ marginTop: '48px' }}>
                         <h3 style={{ fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <Bot size={24} color="var(--primary)" />
-                            Reference Telemetry Samples
+                            Example Scans
                         </h3>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                             {samples[type].map((sample, idx) => (
@@ -223,7 +223,7 @@ export default function Analyze() {
                                         color: idx === 2 && type !== 'sms' ? 'var(--success)' : 'var(--danger)',
                                         letterSpacing: '0.1em'
                                     }}>
-                                        {idx === 2 && type !== 'sms' ? '🛡️ Safe Protocol' : '⚠️ Threat Vector'}
+                                        {idx === 2 && type !== 'sms' ? '🛡️ Safe Example' : '⚠️ Potential Threat'}
                                     </div>
                                     <div style={{
                                         fontSize: '14px',
@@ -248,7 +248,7 @@ export default function Analyze() {
                             disabled={loading || !content.trim()}
                             style={{ minWidth: '240px', height: '64px', fontSize: '18px', background: 'var(--primary)' }}
                         >
-                            {loading ? <Loader size={20} className="spin" /> : <>Initiate Shield Scan</>}
+                            {loading ? <Loader size={20} className="spin" /> : <>Start Analysis</>}
                         </button>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-dim)', fontSize: '14px', fontWeight: 600 }}>
                             <Info size={18} />
@@ -288,21 +288,21 @@ export default function Analyze() {
                                         </select>
                                     </div>
                                     {isGeneratingAudio ? (
-                                        <div style={{ fontSize: '13px', color: 'var(--text-dim)', fontWeight: 700 }}><Loader size={14} className="spin" /> Synthesizing...</div>
+                                        <div style={{ fontSize: '13px', color: 'var(--text-dim)', fontWeight: 700 }}><Loader size={14} className="spin" /> Generating Audio...</div>
                                     ) : isSpeaking ? (
                                         <button className="btn" style={{ padding: '8px 16px', height: '36px', fontSize: '12px', background: 'var(--danger)', borderRadius: '12px' }} onClick={stopSpeaking}>
                                             <VolumeX size={14} /> Stop
                                         </button>
                                     ) : (
                                         <button className="btn" style={{ padding: '8px 16px', height: '36px', fontSize: '12px', background: 'var(--primary)', borderRadius: '12px' }} onClick={() => speakResult(result)}>
-                                            <Volume2 size={14} /> Read Report
+                                            <Volume2 size={14} /> Listen to Report
                                         </button>
                                     )}
                                 </div>
                             </div>
                             <div style={{ textAlign: 'right' }}>
                                 <div style={{ fontSize: '56px', fontWeight: '900', color: 'var(--text-main)', lineHeight: 1 }}>{result.risk_score}%</div>
-                                <div style={{ color: 'var(--text-dim)', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px' }}>Risk Index</div>
+                                <div style={{ color: 'var(--text-dim)', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px' }}>Risk Score</div>
                             </div>
                         </div>
 
@@ -314,10 +314,10 @@ export default function Analyze() {
                             <div style={{ gridColumn: 'span 12' }}>
                                 <div className="glass-card" style={{ background: '#f8fafc', padding: '32px', border: '1px solid rgba(0,0,0,0.03)' }}>
                                     <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <Bot size={20} color="var(--primary)" /> Intelligence Reasoning
+                                        <Bot size={20} color="var(--primary)" /> AI Analysis Details
                                     </h4>
                                     <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--text-main)' }}>
-                                        {result.report_details.ai_analysis?.reasoning || "System structurally analyzed the provided vector. No behavioral anomalies detected by AI core."}
+                                        {result.report_details.ai_analysis?.reasoning || "System analyzed the provided content. No suspicious patterns were detected."}
                                     </p>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@ export default function Analyze() {
                             <div style={{ gridColumn: 'span 12', marginTop: '32px' }}>
                                 <div className="glass-card" style={{ background: 'white', padding: '32px', border: '1px solid rgba(0,0,0,0.03)' }}>
                                     <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <ShieldAlert size={20} color="var(--danger)" /> Source Analysis Highlight
+                                        <ShieldAlert size={20} color="var(--danger)" /> Analysis Findings
                                     </h4>
                                     <div className="diff-viewer">
                                         {renderDiff(result.content, result.report_details.found_keywords)}
@@ -335,7 +335,7 @@ export default function Analyze() {
 
                             {result.report_details.url_findings?.length > 0 && (
                                 <div style={{ gridColumn: 'span 12', marginTop: '24px' }}>
-                                    <h4 style={{ marginBottom: '16px', fontWeight: 800, color: 'var(--text-dim)' }}>Detected Vectors ({result.report_details.url_findings.length})</h4>
+                                    <h4 style={{ marginBottom: '16px', fontWeight: 800, color: 'var(--text-dim)' }}>Detected Risks ({result.report_details.url_findings.length})</h4>
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
                                         {result.report_details.url_findings.map((url, i) => (
                                             <div key={i} className="glass-card" style={{ padding: '24px', background: 'white' }}>
@@ -353,7 +353,7 @@ export default function Analyze() {
                             setContent('');
                             stopSpeaking();
                         }}>
-                            Clear Buffer & Scan New Vector
+                            Clear & New Scan
                         </button>
                     </div>
                 </div>

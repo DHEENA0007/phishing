@@ -17,7 +17,7 @@ export default function Login({ setUser }) {
             setUser(data.user);
             navigate('/');
         } catch (err) {
-            setError('System Access Denied: Verify Protocol Credentials');
+            setError('Access Denied: Please check your credentials');
         }
     };
 
@@ -29,24 +29,24 @@ export default function Login({ setUser }) {
                 </div>
 
                 <h1 className="header-title" style={{ fontSize: '48px', marginBottom: '8px', textAlign: 'center' }}>OmniShield</h1>
-                <p style={{ color: 'var(--text-dim)', fontSize: '18px', marginBottom: '48px', fontWeight: 500 }}>Global Cyber Intelligence Node</p>
+                <p style={{ color: 'var(--text-dim)', fontSize: '18px', marginBottom: '48px', fontWeight: 500 }}>Secure Access Port</p>
 
                 {error && <div style={{ background: 'rgba(239, 68, 68, 0.05)', color: 'var(--danger)', padding: '16px', borderRadius: '24px', marginBottom: '32px', fontSize: '14px', fontWeight: '700', border: '1px solid rgba(239, 68, 68, 0.1)' }}>{error}</div>}
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                     <div style={{ textAlign: 'left' }}>
-                        <label style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginLeft: '12px', marginBottom: '8px', display: 'block' }}>Entity Identifier (Email)</label>
+                        <label style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginLeft: '12px', marginBottom: '8px', display: 'block' }}>Email Address</label>
                         <input
                             type="email"
                             className="input-field"
-                            placeholder="entity@omnishield.ai"
+                            placeholder="user@email.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div style={{ textAlign: 'left' }}>
-                        <label style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginLeft: '12px', marginBottom: '8px', display: 'block' }}>Security Key (Password)</label>
+                        <label style={{ fontSize: '13px', fontWeight: '800', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', marginLeft: '12px', marginBottom: '8px', display: 'block' }}>Password</label>
                         <input
                             type="password"
                             className="input-field"
@@ -57,12 +57,12 @@ export default function Login({ setUser }) {
                         />
                     </div>
                     <button type="submit" className="btn" style={{ width: '100%', marginTop: '16px', borderRadius: '24px', height: '72px', fontSize: '18px' }}>
-                        Establish Uplink <ArrowRight size={20} style={{ marginLeft: '8px' }} />
+                        Secure Login <ArrowRight size={20} style={{ marginLeft: '8px' }} />
                     </button>
                 </form>
 
                 <div style={{ marginTop: '40px', color: 'var(--text-dim)', fontWeight: 600 }}>
-                    New operative? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 800 }}>Enroll Agent →</Link>
+                    New user? <Link to="/register" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 800 }}>Sign Up →</Link>
                 </div>
             </div>
         </div>
